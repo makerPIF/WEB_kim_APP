@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#16233F">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="김차장">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>금융친구 김차장 · 연금 준비 가이드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Do+Hyeon&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#16233F; --navy2:#22345C; --ink:#1B2233; --sub:#6B7385; --line:#E6E9F0;
+  --bg:#F3F5F9; --card:#FFFFFF; --amber:#2BC4A6; --amberSoft:#E3F7F2;
+  --up:#E5383B; --down:#2F6BFF; --flat:#8A93A6; --ok:#13A26B;
+  --r:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:#DCE1EA;height:100%;-webkit-text-size-adjust:100%}
+body{overscroll-behavior-y:none}
+body{font-family:'Noto Sans KR',system-ui,sans-serif;color:var(--ink);font-size:15px;line-height:1.5}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input,select{font-family:inherit;font-size:16px}
+.app{max-width:440px;margin:0 auto;min-height:100%;background:var(--bg);position:relative;display:flex;flex-direction:column;
+  padding-top:env(safe-area-inset-top)}
+/* header */
+.top{position:sticky;top:0;z-index:20;background:var(--navy);color:#fff;padding:12px 12px 12px 14px;display:flex;align-items:center;gap:8px}
+.top .pill{flex:none}
+.logo{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+.logo svg{flex:none}
+.logo b{font-family:'Do Hyeon',sans-serif;font-size:21px;font-weight:400;letter-spacing:.3px;white-space:nowrap;display:block;overflow:hidden;text-overflow:ellipsis}
+.logo>div{min-width:0}
+.logo small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.logo small{display:block;font-size:11px;color:#AFC0E0;margin-top:-3px}
+.pill{font-size:11px;padding:4px 9px;border-radius:99px;background:rgba(255,255,255,.12);display:flex;align-items:center;gap:5px;white-space:nowrap}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--amber);display:inline-block}
+.pill:not(.live) i{background:#F5A524}
+.pill.live i{background:#3BE08F;box-shadow:0 0 0 3px rgba(59,224,143,.25)}
+.iconbtn{width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.12);display:grid;place-items:center}
+.iconbtn.spin svg{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+main{flex:1;padding:14px 14px 96px}
+.view{display:none}.view.on{display:block}
+h2.sec{font-size:15px;font-weight:700;margin:20px 4px 10px;display:flex;justify-content:space-between;align-items:center}
+h2.sec span{font-size:12px;color:var(--sub);font-weight:400}
+.card{background:var(--card);border-radius:var(--r);padding:16px;box-shadow:0 1px 2px rgba(20,30,60,.05)}
+/* briefing */
+.brief{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;border-radius:22px;padding:18px;position:relative;overflow:hidden}
+.brief .who{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.brief .who b{font-size:15px}
+.brief .who small{display:block;font-size:11px;color:#AFC0E0}
+.bubble{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:4px 16px 16px 16px;padding:12px 14px;font-size:14px;line-height:1.65}
+.bubble em{font-style:normal;color:var(--amber);font-weight:700}
+.brief .acts{display:flex;gap:8px;margin-top:12px}
+.btn{padding:10px 14px;border-radius:12px;font-weight:700;font-size:13px}
+.btn.amber{background:var(--amber);color:#fff}
+.btn.ghost{background:rgba(255,255,255,.12);color:#fff}
+.btn.line{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.btn.navy{background:var(--navy);color:#fff}
+.btn.block{width:100%;padding:13px}
+/* tiles */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{background:var(--card);border-radius:16px;padding:13px 14px;text-align:left;position:relative}
+.tile .nm{font-size:12.5px;color:var(--sub);display:flex;justify-content:space-between}
+.tile .vl{font-size:19px;font-weight:700;margin-top:3px;font-variant-numeric:tabular-nums;letter-spacing:-.3px}
+.tile .vl small{font-size:12px;font-weight:500;color:var(--sub);margin-left:2px}
+.tile .ch{font-size:12.5px;font-weight:500;font-variant-numeric:tabular-nums}
+.star{color:#D0D5DF;font-size:14px;line-height:1}
+.star.on{color:var(--amber)}
+.up{color:var(--up)}.down{color:var(--down)}.flat{color:var(--flat)}
+.spark{position:absolute;right:12px;bottom:12px;opacity:.9}
+/* events */
+.ev{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.ev:last-child{border:0;padding-bottom:0}.ev:first-child{padding-top:0}
+.ev .d{flex:none;width:52px;text-align:center;background:var(--amberSoft);border-radius:12px;padding:6px 0;font-weight:700;color:#0E7F6A;font-size:13px;line-height:1.25}
+.ev .d small{display:block;font-size:10px;font-weight:500}
+.ev p{font-size:13.5px}.ev p b{display:block;font-size:14px}
+.ev p span{color:var(--sub);font-size:12.5px}
+/* market */
+.chips{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:8px 14px;border-radius:99px;background:#fff;border:1px solid var(--line);font-size:13.5px;font-weight:500;color:var(--sub)}
+.chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.list{background:var(--card);border-radius:var(--r);overflow:hidden}
+.row{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);width:100%;text-align:left}
+.row:last-child{border:0}
+.row .ic{flex:none;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:17px;background:#F0F3F8}
+.row .tx{flex:1;min-width:0}
+.row .tx b{display:block;font-size:14.5px;font-weight:500}
+.row .tx small{color:var(--sub);font-size:12px}
+.row .nv{text-align:right;font-variant-numeric:tabular-nums}
+.row .nv b{display:block;font-size:15.5px}
+.row .nv small{font-size:12.5px;font-weight:500}
+.note{font-size:12px;color:var(--sub);padding:10px 6px;line-height:1.6}
+/* sheet */
+.dim{position:fixed;inset:0;background:rgba(10,16,30,.45);z-index:50;display:none;align-items:flex-end;justify-content:center}
+.dim.on{display:flex}
+.sheet{width:100%;max-width:440px;background:#fff;border-radius:24px 24px 0 0;padding:10px 20px calc(24px + env(safe-area-inset-bottom));max-height:86vh;overflow:auto;animation:up .22s ease-out}
+@keyframes up{from{transform:translateY(40px);opacity:.4}}
+.grab{width:40px;height:5px;border-radius:9px;background:#D7DCE5;margin:0 auto 14px}
+.sheet h3{font-size:18px}
+.sheet .big{font-size:32px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.5px;margin-top:4px}
+.kimsay{display:flex;gap:10px;background:var(--amberSoft);border-radius:16px;padding:12px;margin:14px 0;font-size:14px;line-height:1.6}
+.kimsay svg{flex:none}
+.meta{font-size:12px;color:var(--sub);line-height:1.7}
+/* calc */
+.seg{display:flex;background:#E9EDF4;border-radius:12px;padding:3px;margin-bottom:14px}
+.seg button{flex:1;padding:9px;border-radius:10px;font-size:13.5px;font-weight:500;color:var(--sub)}
+.seg button.on{background:#fff;color:var(--ink);font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.fld{margin-bottom:12px}
+.fld label{display:block;font-size:12.5px;color:var(--sub);margin-bottom:5px}
+.fld .in{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:12px;padding:0 12px;background:#fff}
+.fld .in:focus-within{border-color:var(--navy)}
+.fld input,.fld select{flex:1;border:0;outline:0;padding:12px 0;background:transparent;min-width:0;font-variant-numeric:tabular-nums}
+.fld .u{color:var(--sub);font-size:14px;margin-left:6px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.two>*{min-width:0}
+.fld .in{min-width:0}
+.fld select{width:100%;min-width:0;text-overflow:ellipsis}
+
+.app{overflow-x:clip}
+.result{background:var(--navy);color:#fff;border-radius:16px;padding:16px;margin-top:6px}
+.result .k{font-size:12.5px;color:#AFC0E0}
+.result .v{font-size:26px;font-weight:900;font-variant-numeric:tabular-nums;margin:2px 0 8px}
+.result .r{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-top:1px solid rgba(255,255,255,.1);font-variant-numeric:tabular-nums}
+.result .tip{margin-top:10px;font-size:12.5px;color:#9FF0DF;line-height:1.6}
+/* chat */
+.chat{display:flex;flex-direction:column;gap:12px;padding-bottom:10px}
+.msg{display:flex;gap:8px;align-items:flex-start}
+.msg.me{justify-content:flex-end}
+.msg .b{max-width:82%;padding:11px 14px;border-radius:4px 16px 16px 16px;background:#fff;font-size:14.5px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere}
+.msg.me .b{background:var(--navy);color:#fff;border-radius:16px 4px 16px 16px}
+.msg .b ul{padding-left:18px;margin:4px 0}
+.msg .b strong{color:var(--navy2)}
+.msg.me .b strong{color:var(--amber)}
+.msg .b .tools{font-size:11.5px;color:var(--sub);margin-top:6px}
+.typing{color:var(--sub);font-size:13px}
+.msg .b .sec{margin:10px 0 4px;font-size:13.5px}.msg .b .sec:first-child{margin-top:0}
+.msg .b a{color:var(--navy2);font-weight:500}
+.news{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.news a{display:block;background:#F4F6FA;border-radius:10px;padding:8px 10px;text-decoration:none;color:var(--ink)}
+.news a b{display:block;font-size:13.5px;font-weight:500;line-height:1.45}
+.news a span{font-size:11.5px;color:var(--sub)}
+.quick{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px 44px}
+.quick button{background:#fff;border:1px solid var(--line);border-radius:99px;padding:7px 12px;font-size:13px;color:var(--navy2)}
+.composer{position:fixed;left:0;right:0;bottom:calc(84px + env(safe-area-inset-bottom));z-index:15;display:none;justify-content:center;pointer-events:none}
+.composer.on{display:flex}
+.composer form{pointer-events:auto;width:100%;max-width:440px;padding:8px 12px;background:linear-gradient(to top,var(--bg) 70%,rgba(243,245,249,0));display:flex;gap:8px}
+.composer input{flex:1;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;outline:0;background:#fff}
+.composer input:focus{border-color:var(--navy)}
+.composer button{background:var(--amber);color:#fff;border-radius:14px;padding:0 16px;font-weight:900}
+#v-chat{padding-bottom:90px}
+.modebar{font-size:12px;color:var(--sub);background:#fff;border-radius:12px;padding:8px 12px;margin-bottom:12px;display:flex;gap:6px;align-items:center}
+/* dict */
+.search{display:flex;align-items:center;gap:8px;background:#fff;border-radius:14px;padding:0 14px;border:1.5px solid var(--line);margin-bottom:12px}
+.search input{flex:1;border:0;outline:0;padding:12px 0}
+details.term{background:#fff;border-radius:14px;margin-bottom:8px;padding:0 16px}
+details.term summary{list-style:none;padding:14px 0;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+details.term summary::-webkit-details-marker{display:none}
+details.term summary small{font-weight:400;color:var(--sub);font-size:12px;margin-left:6px}
+details.term summary:after{content:'+';color:var(--sub);font-weight:400;font-size:20px}
+details.term[open] summary:after{content:'–'}
+details.term p{padding:0 0 14px;font-size:14px;line-height:1.7;color:#323A4D}
+details.term p .ex{display:block;margin-top:6px;background:var(--amberSoft);border-radius:10px;padding:8px 10px;font-size:13px}
+details.term button{margin:-4px 0 14px;font-size:12.5px;color:var(--navy2);font-weight:700}
+/* nav */
+nav.tab{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:center}
+nav.tab .in{width:100%;max-width:440px;background:#fff;border-top:1px solid var(--line);display:flex;padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+nav.tab button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;font-size:11px;color:#9AA2B4;font-weight:500}
+nav.tab button.on{color:var(--navy)}
+nav.tab button.on svg{stroke:var(--navy)}
+nav.tab button.kim{position:relative;top:-14px}
+nav.tab button.kim .ring{width:52px;height:52px;border-radius:50%;background:var(--amber);display:grid;place-items:center;box-shadow:0 4px 12px rgba(43,196,166,.45);border:3px solid #fff}
+.foot{font-size:11.5px;color:var(--sub);text-align:center;padding:20px 10px 0;line-height:1.7}
+.toast{position:fixed;left:50%;top:70px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 16px;border-radius:99px;font-size:13px;z-index:60;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1}
+
+/* splash */
+.splash{position:fixed;inset:0;z-index:100;background:radial-gradient(120% 80% at 50% 20%,#2A4378 0%,#16233F 60%,#0E1830 100%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transition:opacity .5s ease, visibility .5s}
+.splash.hide{opacity:0;visibility:hidden}
+.splash .stage{position:relative;width:200px;height:200px;display:grid;place-items:center}
+.splash .halo{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(43,196,166,.35),rgba(43,196,166,0) 70%);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.08);opacity:.7}}
+.splash .kim{animation:pop .7s cubic-bezier(.2,1.6,.4,1) both .15s}
+@keyframes pop{from{transform:scale(.2) translateY(40px);opacity:0}}
+.splash .hand{position:absolute;right:18px;top:52px;font-size:34px;transform-origin:70% 90%;animation:wave 1s ease-in-out 1s 2}
+@keyframes wave{25%{transform:rotate(-18deg)}75%{transform:rotate(18deg)}}
+.splash .say{background:#fff;color:var(--navy);padding:10px 16px;border-radius:16px;font-size:14px;font-weight:500;position:relative;opacity:0;animation:fadeup .5s ease 1s forwards;max-width:280px;text-align:center}
+.splash .say:before{content:'';position:absolute;top:-8px;left:50%;margin-left:-8px;border:8px solid transparent;border-top:0;border-bottom-color:#fff}
+.splash h1{font-family:'Do Hyeon',sans-serif;font-weight:400;font-size:40px;letter-spacing:1px;margin-top:14px;opacity:0;animation:fadeup .6s ease .55s forwards}
+.splash .sub{display:flex;align-items:center;gap:8px;font-size:14px;color:#BFD0EE;opacity:0;animation:fadeup .6s ease .8s forwards}
+.splash .sub i{width:22px;height:2px;background:var(--amber);display:inline-block}
+.splash .partner{min-height:0;opacity:0;animation:fadeup .6s ease .9s forwards}
+.splash .partner img{max-height:40px;max-width:180px;display:block}
+@keyframes fadeup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.splash .bar{width:160px;height:4px;border-radius:9px;background:rgba(255,255,255,.15);overflow:hidden;margin-top:26px}
+.splash .bar b{display:block;height:100%;width:0;background:var(--amber);animation:load 2.8s linear forwards}
+@keyframes load{to{width:100%}}
+.splash .fine{position:absolute;bottom:calc(24px + env(safe-area-inset-bottom));font-size:11.5px;color:#8FA3C8;text-align:center;line-height:1.6;padding:0 20px}
+.splash .skip{position:absolute;top:calc(16px + env(safe-area-inset-top));right:16px;font-size:12.5px;color:#BFD0EE;padding:6px 12px;border:1px solid rgba(255,255,255,.2);border-radius:99px}
+/* products */
+.finder{background:linear-gradient(135deg,#E3F7F2,#F2FBF9);border:1px solid #CBEFE6;border-radius:20px;padding:16px;margin-bottom:14px}
+.finder h3{font-size:16px;display:flex;align-items:center;gap:8px}
+.finder p.q{font-size:13px;color:var(--sub);margin:12px 0 6px}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opts button{background:#fff;border:1.5px solid var(--line);border-radius:99px;padding:7px 12px;font-size:13px}
+.opts button.on{border-color:var(--amber);background:var(--amber);color:#fff;font-weight:700}
+.pcard{background:#fff;border-radius:18px;padding:15px 16px;margin-bottom:10px;width:100%;text-align:left;display:block;position:relative;border:1.5px solid transparent}
+.pcard.hl{border-color:var(--amber)}
+.pcard .tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;background:#EEF1F7;color:var(--navy2);margin-right:4px}
+.pcard .tag.y{background:#E3F7F2;color:#0E7F6A}
+.pcard h4{font-size:16px;margin:7px 0 2px}
+.pcard .d{font-size:12.5px;color:var(--sub)}
+.pcard .rt{position:absolute;right:16px;top:15px;text-align:right}
+.pcard .rt b{display:block;font-size:20px;font-weight:900;color:var(--navy);font-variant-numeric:tabular-nums}
+.pcard .rt small{font-size:11px;color:var(--sub)}
+.pcard .rt.loan b{color:var(--up)}
+.pcard .match{font-size:11.5px;color:#0E7F6A;font-weight:700;margin-top:6px}
+.ptable{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0 4px}
+.ptable td,.ptable th{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+.ptable th{color:var(--sub);font-weight:500;font-size:12px;white-space:nowrap;width:70px}
+.ptable td:last-child,.ptable th:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.sheet h5{font-size:14px;margin:16px 0 6px}
+.sheet ul.pt{padding-left:18px;font-size:14px;line-height:1.7}
+.notice{background:#F4F6FA;border-radius:12px;padding:10px 12px;font-size:12px;color:var(--sub);line-height:1.6;margin-top:12px}
+.hrow{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.hrow::-webkit-scrollbar{display:none}
+.hrow .pcard{flex:none;width:230px;margin:0}
+.pcard .rt{position:static;text-align:left;margin-top:8px}
+.pcard .rt b{display:inline;margin-right:6px}
+
+
+/* join box */
+.join{background:#fff;border:2px solid var(--amber);border-radius:22px;padding:18px;margin-top:14px}
+.join .hd{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:900;color:var(--navy)}
+.join .hd span{font-size:11px;font-weight:700;color:#0E7F6A;background:var(--amberSoft);padding:3px 8px;border-radius:6px}
+.join .bd{display:flex;flex-direction:column;gap:10px;align-items:center;margin-top:12px;text-align:center}
+.join .qr{flex:none;width:220px;height:220px;padding:10px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.join .qr svg{width:100%;height:100%;display:block}
+.join p{font-size:13px;color:#4A5366;line-height:1.6}
+.join .go{display:block;text-align:center;margin-top:12px;background:var(--navy);color:#fff;font-weight:700;padding:13px;border-radius:14px;text-decoration:none;font-size:14.5px}
+.join .fine{font-size:11.5px;color:var(--sub);margin-top:8px;line-height:1.6}
+h2.sec em{font-style:normal}
+.sec .upd{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;margin-left:6px;vertical-align:2px;background:#EEF1F7;color:var(--sub)}
+.sec .upd.live{background:var(--amberSoft);color:#0E7F6A}
+.sec .upd.old{background:#FFF1E6;color:#B4580A}
+h2.sec span.lt{display:flex;align-items:center;flex-wrap:wrap;gap:2px;font-size:15px;color:var(--ink);font-weight:700}
+.offline{margin-top:10px;font-size:12px;color:#FFD9B0;line-height:1.6}
+.offline button{color:#fff;text-decoration:underline;font-size:12px;font-weight:700}
+.sheet{position:relative;touch-action:pan-y;will-change:transform}
+.sheet.dragging{transition:none!important;animation:none}
+.sheet.closing{transition:transform .22s ease-in}
+.grabzone{position:sticky;top:-10px;margin:-10px -20px 6px;padding:12px 20px 30px;background:#fff;z-index:2;cursor:grab;touch-action:none}
+.grabzone .grab{margin:0 auto}
+.sheetx{position:absolute;right:12px;top:8px;width:32px;height:32px;line-height:32px!important;border-radius:50%;background:#F0F3F8;color:#4A5366;font-size:18px;line-height:34px;text-align:center;z-index:3}
+.dim{transition:background .2s}
+</style>
+</head>
+<body>
+<div class="splash" id="splash" role="dialog" aria-label="오프닝">
+  <button class="skip" id="skipBtn">건너뛰기</button>
+  <div class="stage"><div class="halo"></div><div class="kim" id="splashKim"></div><div class="hand">👋</div></div>
+  <div class="say">안녕하세요, 김차장이에요!<br>개인형 IRP, 제가 쉽게 알려드릴게요</div>
+  <h1>금융친구 김차장</h1>
+  <div class="sub"><i></i>연금 준비 가이드 · 개인형 IRP<i></i></div>
+    <div class="bar"><b></b></div>
+  <div class="fine">본 앱은 금융 정보를 쉽게 전달하는 교육용 서비스이며 투자 권유가 아닙니다.<br>PUMPKIN IDEA FACTORY MAKERSPACE</div>
+</div>
+<div class="app">
+  <header class="top">
+    <div class="logo">
+      <svg id="logoKim" width="38" height="38"></svg>
+      <div><b>금융친구 김차장</b><small>연금 준비 가이드 · 개인형 IRP</small></div>
+    </div>
+    <span class="pill" id="statusPill" style="display:none"><i></i><span id="statusTxt">기준 시세</span></span>
+    <button class="iconbtn" data-go="dict" aria-label="용어사전" style="width:auto;padding:0 10px;font-size:12.5px;font-weight:700;color:#fff">용어</button>
+    <button class="iconbtn" id="refreshBtn" aria-label="새로고침">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>
+    </button>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section class="view" id="v-home">
+      <div class="brief">
+        <div class="who"><svg class="kimAvatar" width="42" height="42"></svg><div><b>김차장의 오늘 시장 브리핑</b><small id="briefDate"></small></div></div>
+        <div class="bubble" id="briefText"></div>
+        <div class="offline" id="briefOffline"></div>
+        <div class="acts">
+          <button class="btn amber" data-ask="코스피 환율 오늘 시장">관련 뉴스 찾아보기</button>
+          <button class="btn ghost" data-go="market">전체 시세</button>
+        </div>
+      </div>
+
+      <div id="joinHome"></div>
+
+      <h2 class="sec"><span class="lt">IRP 핵심 한눈에<em class="upd live" id="updIrp"></em></span><span data-go="prod" style="cursor:pointer;color:#0E7F6A">전체 보기 ›</span></h2>
+      <div class="hrow" id="homeProds"></div>
+
+      <h2 class="sec"><span class="lt">내 관심 지표<em class="upd" id="updFav"></em></span><span>★ 눌러서 편집</span></h2>
+      <div class="tiles" id="favTiles"></div>
+
+      <h2 class="sec"><span class="lt">꼭 챙길 일정<em class="upd live" id="updEv"></em></span></h2>
+      <div class="card" id="events"></div>
+
+      <h2 class="sec">많이 찾는 질문</h2>
+      <div class="card" style="display:flex;flex-direction:column;gap:8px" id="homeQs"></div>
+
+      <p class="foot">본 앱은 금융 정보를 쉽게 전달하기 위한 교육용 서비스이며 투자 권유가 아닙니다.<br>투자 판단과 책임은 본인에게 있습니다.</p>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="view" id="v-prod">
+      <div id="joinProd" style="margin-bottom:14px"></div>
+      <div class="finder" id="finder"></div>
+      <div class="chips" id="prodChips"></div>
+      <div id="prodList"></div>
+      <p class="note">📌 2026년 세법 기준으로 정리했어요 (내용 확인일 <b id="irpChecked"></b>). 세법·한도는 바뀔 수 있고 개인 상황마다 다르니, 가입 금융회사·국세청 홈택스·금융감독원 통합연금포털에서 꼭 확인하세요. 안내 내용은 교육용 정보이며, '상품 가입하기'는 KB국민은행 공식 페이지로 연결돼요.</p>
+    </section>
+
+    <!-- MARKET -->
+    <section class="view" id="v-market">
+      <div class="chips" id="catChips"></div>
+      <div class="list" id="mktList"></div>
+      <p class="note" id="mktNote"></p>
+    </section>
+
+    <!-- CALC -->
+    <section class="view" id="v-calc">
+      <div class="seg" id="calcSeg">
+        <button data-c="irp" class="on">IRP 절세</button><button data-c="save">예·적금</button><button data-c="loan">대출이자</button><button data-c="fx">환전</button>
+      </div>
+      <div class="card" id="calcBox"></div>
+    </section>
+
+    <!-- CHAT -->
+    <section class="view" id="v-chat">
+      <div class="modebar" id="modeBar">연결 확인 중…</div>
+      <div class="chat" id="chatLog"></div>
+      <div class="quick" id="quickQs"></div>
+    </section>
+
+    <!-- DICT -->
+    <section class="view" id="v-dict">
+      <div class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A93A6" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="dictQ" placeholder="용어 검색 (예: 금리, CPI, 김프)">
+      </div>
+      <div id="dictList"></div>
+    </section>
+  </main>
+
+  <div class="composer" id="composer">
+    <form id="chatForm"><input id="chatIn" placeholder="김차장에게 무엇이든 물어보세요" autocomplete="off"><button type="submit">전송</button></form>
+  </div>
+
+  <nav class="tab"><div class="in">
+    <button data-go="home"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9AA2B4" stroke-width="2" stroke-linejoin="round"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>홈</button>
+    <button data-go="prod"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9AA2B4" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M8 6V4h8v2M3 11h18"/></svg>IRP</button>
+    <button data-go="chat" class="kim"><span class="ring"><svg class="kimAvatar" width="40" height="40"></svg></span>김차장</button>
+    <button data-go="calc"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9AA2B4" stroke-width="2"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg>계산기</button>
+    <button data-go="market"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9AA2B4" stroke-width="2" stroke-linecap="round"><path d="M3 17l5-5 4 4 8-8"/><path d="M15 8h5v5"/></svg>시세</button>
+  </div></nav>
+
+  <div class="dim" id="dim"><div class="sheet" id="sheet"></div></div>
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+
+/* ============ 0. 새 버전 자동 확인 ============
+   폰 브라우저가 예전 화면(캐시·열어둔 탭)을 보여주는 문제를 막아요.
+   GitHub에 새 index.html을 올릴 때 아래 APP_VERSION만 바꾸면, 사용자 폰이 자동으로 새 버전으로 바뀌어요. */
+const APP_VERSION = '2026.11.15-5';
+async function checkVersion(){
+  if(!/^https?:$/.test(location.protocol)) return;            // 파일로 열었을 때는 건너뜀
+  if(!/github\.io$/.test(location.hostname)) return;          // 공개 주소에서만 동작
+  try{
+    const r=await fetch(location.pathname+'?vc='+Date.now(),{cache:'no-store'});
+    if(!r.ok) return;
+    const m=(await r.text()).match(/const APP_VERSION = '([^']+)'/);
+    if(!m||m[1]===APP_VERSION) return;
+    const key='kcj_reloaded_'+m[1];
+    try{ if(sessionStorage.getItem(key)) return; sessionStorage.setItem(key,'1'); }catch(e){}
+    location.replace(location.pathname+'?v='+encodeURIComponent(m[1])+location.hash);  // 주소를 바꿔 캐시를 우회
+  }catch(e){}
+}
+
+/* ============ 1. 기준 데이터 (2026-11-09 국내 장마감 무렵, 언론 보도 기준) ============ */
+/* 서버 연결 전·실패 시 보여줄 기준값 (2026.11.9 장마감 무렵 보도 기준). 서버가 연결되면 자동으로 최신 값으로 바뀝니다. */
+const SNAP_TIME = '2026.11.9 기준값';
+const CONTENT_CHECKED = '2026-11-14'; /* IRP 안내 내용을 마지막으로 확인한 날짜 — 내용을 고치면 함께 바꿔 주세요 */
+const CATS = [
+  {id:'fx',  name:'환율'},
+  {id:'kr',  name:'국내증시'},
+  {id:'us',  name:'미국증시'},
+  {id:'gold',name:'금·유가'},
+  {id:'coin',name:'코인'},
+  {id:'rate',name:'금리'}
+];
+const ITEMS = [
+ {id:'usd', cat:'fx', ic:'🇺🇸', name:'달러', sub:'USD/KRW', v:1347.10, unit:'원', chg:-9.5, pct:-0.70, src:'서울외환시장 종가 (기준값)',
+  kim:'환율이 내리면(원화 강세) 해외여행·직구·수입품 가격이 조금 싸지고, 오르면 반대예요. 수출기업 실적과는 반대로 움직이는 편이에요.'},
+ {id:'jpy', cat:'fx', ic:'🇯🇵', name:'엔화', sub:'100엔당', v:851.14, unit:'원', chg:-7.88, pct:-0.92, src:'은행 매매기준율 (기준값)',
+  kim:'일본 여행 전이라면 한 번에 몰아서 바꾸기보다 몇 번에 나눠 환전하면 환율 변동 위험이 줄어요.'},
+ {id:'eur', cat:'fx', ic:'🇪🇺', name:'유로', sub:'EUR/KRW', v:1503.70, unit:'원', chg:-14.61, pct:-0.96, src:'은행 매매기준율 (기준값)',
+  kim:'유럽 여행·유학 비용과 직결돼요. 1유로가 몇 원인지 기억해 두면 현지 물가 감이 와요.'},
+ {id:'cny', cat:'fx', ic:'🇨🇳', name:'위안', sub:'CNY/KRW', v:201.87, unit:'원', chg:-1.63, pct:-0.80, src:'은행 매매기준율 (기준값)',
+  kim:'중국 직구 가격에 영향을 줘요. 1위안이 대략 몇 원인지 알아두면 계산이 편해요.'},
+ {id:'kospi', cat:'kr', ic:'📈', name:'코스피', sub:'유가증권시장', v:5018.85, unit:'', chg:-40.84, pct:-0.81, src:'한국거래소 (기준값)', krx:1,
+  kim:'한국 대표 주가지수예요. 외국인 매매와 반도체 업황에 크게 움직여요. 퇴직연금·IRP에서 국내 주식형 펀드를 가졌다면 같이 움직여요.'},
+ {id:'kosdaq', cat:'kr', ic:'🚀', name:'코스닥', sub:'중소·벤처 중심', v:638.97, unit:'', chg:-5.30, pct:-0.82, src:'한국거래소 (기준값)', krx:1,
+  kim:'바이오·IT 중소형주가 많은 시장이라 코스피보다 오르내림이 큰 편이에요.'},
+ {id:'spx', cat:'us', ic:'🗽', name:'S&P500', sub:'미국 대표 500개 기업', v:7376.86, unit:'', chg:23.13, pct:0.31, src:'뉴욕증권거래소 (기준값)',
+  kim:'미국 시장 전체 흐름을 보여줘요. IRP에서 많이 담는 미국 지수 ETF가 이 지수를 따라가요.'},
+ {id:'ndx', cat:'us', ic:'💻', name:'나스닥', sub:'기술주 중심', v:24579.42, unit:'', chg:264.43, pct:1.09, src:'나스닥 (기준값)',
+  kim:'AI·반도체 같은 기술주 중심 지수예요. 다른 지수보다 크게 출렁이는 편이에요.'},
+ {id:'dji', cat:'us', ic:'🏛️', name:'다우존스', sub:'전통 우량주 30개', v:51285.73, unit:'', chg:-237.33, pct:-0.46, src:'뉴욕증권거래소 (기준값)',
+  kim:'미국 전통 우량주 30개로 만든 지수예요. 금리 소식에 민감하게 반응해요.'},
+ {id:'goldkrx', cat:'gold', ic:'🥇', name:'금 1g', sub:'국제시세 원화 환산', v:178770, unit:'원', chg:2080, pct:1.18, src:'한국거래소 금시장 (기준값)',
+  kim:'국제 금값을 원·달러 환율로 바꿔 1g 값으로 계산했어요. 금은방에서 살 땐 부가세·수수료가 붙어 이보다 비싸요.'},
+ {id:'golddon', cat:'gold', ic:'💍', name:'금 한 돈', sub:'3.75g · 국제시세 환산', v:670388, unit:'원', chg:7800, pct:1.18, src:'국제시세 환산 (기준값)',
+  kim:'돌반지 한 개가 보통 한 돈이에요. 실제 매장 판매가는 부가세·공임 때문에 이보다 10% 이상 높아요.'},
+ {id:'goldint', cat:'gold', ic:'🌐', name:'국제 금', sub:'온스당 (금 선물)', v:4107.82, unit:'$', chg:33.0, pct:0.81, src:'국제 금 시세 (기준값)',
+  kim:'달러 약세나 불안한 시기에 오르는 경향이 있어요. 원화 금값은 국제 금값과 환율을 함께 봐야 해요.'},
+ {id:'wti', cat:'gold', ic:'🛢️', name:'WTI 유가', sub:'배럴당 (원유 선물)', v:90.83, unit:'$', chg:0.31, pct:0.34, src:'뉴욕상업거래소 (기준값)',
+  kim:'유가는 몇 주 뒤 주유소 기름값과 물가에 반영돼요.'},
+ {id:'btc', cat:'coin', ic:'₿', name:'비트코인', sub:'업비트 KRW', v:101560000, unit:'원', chg:-900000, pct:-0.88, src:'업비트 (기준값)',
+  kim:'하루에도 크게 오르내려요. 노후 자금이나 생활비가 아닌 여윳돈으로만 접근하세요. IRP로는 코인에 투자할 수 없어요.'},
+ {id:'eth', cat:'coin', ic:'◆', name:'이더리움', sub:'업비트 KRW', v:2911000, unit:'원', chg:null, pct:-4.54, pctLabel:'주간', src:'업비트 (기준값)',
+  kim:'비트코인보다 변동이 더 큰 편이에요.'},
+ {id:'bok', cat:'rate', ic:'🏦', name:'한국 기준금리', sub:'한국은행 금융통화위원회', v:3.00, unit:'%', chg:0, pct:null, src:'한국은행 (2026.10.22 결정)', fixed:1,
+  kim:'예금·대출 금리의 기준이에요. 오르면 대출 이자가 늘고 예금 이자도 오르는 경향이 있어요. 결정일 일정은 홈 화면에서 확인하세요.'},
+ {id:'fed', cat:'rate', ic:'🦅', name:'미국 기준금리', sub:'미 연준 FOMC', v:'3.75~4.00', unit:'%', chg:0, pct:null, src:'미 연준 (2026.10.28 결정)', fixed:1,
+  kim:'미국 금리가 오르면 달러가 강해지고 신흥국 증시엔 부담이 되는 경향이 있어요.'},
+ {id:'cofix', cat:'rate', ic:'🏠', name:'코픽스(신규)', sub:'변동금리 대출의 기준', v:3.43, unit:'%', chg:0.25, pct:null, chgUnit:'%p', src:'은행연합회 (2026.9월분)', fixed:1,
+  kim:'주택담보대출 변동금리의 기준이에요. 매달 15일 무렵 새로 발표돼요.'}
+];
+/* 일정: date(YYYY-MM-DD)가 지나면 자동으로 숨겨져요. 새 일정은 여기에 추가하세요. */
+const EVENTS = [
+ {date:'2026-11-26', w:'목', t:'한국은행 금융통화위원회', s:'기준금리 결정. 인상 시 변동금리 대출 이자 ↑'},
+ {date:'2026-12-10', w:'한국시간', t:'미국 FOMC 금리 결정', s:'결과에 따라 달러·증시·코인이 움직일 수 있어요'},
+ {date:'2026-12-31', w:'수', t:'올해 IRP·연금저축 납입 마감', s:'12월 31일까지 넣은 돈만 올해 세액공제 대상이에요'},
+ {date:'2027-01-15', w:'예정', t:'연말정산 간소화 서비스 개통 (매년 1월 중순)', s:'IRP·연금저축 납입증명이 자동으로 모여요'}
+];
+function upcomingEvents(){
+  const today=new Date(); const t0=new Date(today.getFullYear(),today.getMonth(),today.getDate()).getTime();
+  return EVENTS.filter(e=>new Date(e.date+'T23:59:59').getTime()>=t0).map(e=>{const d=new Date(e.date+'T00:00:00'); return {...e,d:`${d.getMonth()+1}/${d.getDate()}`, dday:Math.round((d.getTime()-t0)/864e5)}});
+}
+const TERMS = [
+ ['IRP','개인형 퇴직연금','소득 있는 사람이 노후 자금을 모으며 세액공제를 받는 계좌예요. 퇴직금을 받는 통장으로도 쓰여요.','연금저축과 합산 연 900만원까지 세액공제'],
+ ['연금저축','세액공제 되는 개인 연금 계좌','연 600만원까지 세액공제를 받을 수 있고, IRP보다 투자 제한이 적으며 부분 인출이 가능해요.',''],
+ ['세액공제','낸 세금에서 직접 빼주는 것','소득에서 빼는 "소득공제"와 달리, 계산된 세금 자체를 줄여줘요. 그래서 효과가 바로 보여요.','IRP 900만원 × 16.5% = 148만 5천원'],
+ ['디폴트옵션','사전지정운용제도','운용 지시를 하지 않으면 미리 정한 상품으로 자동 투자되게 하는 제도예요.',''],
+ ['실물이전','상품을 팔지 않고 계좌 옮기기','연금 계좌를 다른 금융회사로 옮길 때 가진 상품을 그대로 옮기는 방법이에요.',''],
+ ['연금소득세','연금으로 받을 때 내는 세금','55세 이후 연금으로 받으면 나이에 따라 5.5%·4.4%·3.3%의 낮은 세율이 붙어요.',''],
+ ['퇴직소득세','퇴직금에 붙는 세금','퇴직금을 IRP에서 연금으로 나눠 받으면 30~50% 줄어들어요.',''],
+ ['ISA','개인종합자산관리계좌','여러 상품을 한 계좌에서 굴리며 비과세 혜택을 받는 계좌예요. 만기 자금을 연금계좌로 옮기면 추가 공제를 받아요.',''],
+ ['기준금리','중앙은행이 정하는 \'돈의 기본 가격\'','한국은행이 정하는 금리로, 은행 예금·대출 금리의 기준이 돼요. 오르면 대출이자와 예금이자가 함께 오르는 경향이 있어요.','기준금리 0.25%p 인상 → 3억 변동금리 대출이면 연 이자 약 75만원 증가'],
+ ['환율','외국 돈 1단위를 사는 데 드는 원화','달러 환율 1,347원 = 1달러를 사려면 1,347원이 필요하다는 뜻이에요. 숫자가 오르면 원화 가치가 떨어진 거예요.','환율 ↑ → 해외여행·직구 비싸짐 / 수출기업엔 유리'],
+ ['매매기준율','은행 환율의 중간값','은행이 환전할 때 기준으로 삼는 환율이에요. 실제로 살 땐 이보다 비싸게, 팔 땐 싸게 적용돼요(환전 수수료).','달러 현찰 살 때 ≈ 매매기준율 × 1.0175'],
+ ['코스피','한국 대표 주가지수','유가증권시장에 상장된 전체 기업의 시가총액을 지수로 만든 것이에요. 한국 증시의 \'체온계\'라고 보면 돼요.',''],
+ ['코스닥','중소·벤처기업 중심 주가지수','IT·바이오 같은 성장 기업이 많아서 코스피보다 등락이 큰 편이에요.',''],
+ ['S&P500','미국 대표 500대 기업 지수','미국 주식시장 전체 흐름을 가장 잘 보여주는 지수예요. 이 지수를 따라가는 ETF에 많은 사람이 투자해요.',''],
+ ['나스닥','미국 기술주 중심 지수','애플·엔비디아 같은 기술 기업 비중이 높아요. AI·반도체 뉴스에 크게 반응해요.',''],
+ ['CPI','소비자물가지수','장바구니 물가가 얼마나 올랐는지 보여주는 지표예요. 높게 나오면 중앙은행이 금리를 올릴 가능성이 커져요.',''],
+ ['FOMC','미국 연준의 금리 결정 회의','1년에 8번 열려 미국 기준금리를 정해요. 결과에 따라 전 세계 환율·증시가 움직여요.',''],
+ ['금통위','한국은행 금융통화위원회','한국 기준금리를 결정하는 회의예요. 1년에 8번 열려요.',''],
+ ['코픽스','COFIX, 은행 자금조달 비용 지수','은행이 예금 등으로 돈을 모으는 데 드는 평균 비용이에요. 변동금리 주택담보대출의 기준이 돼요.',''],
+ ['원리금균등상환','매달 같은 금액을 갚는 방식','원금+이자를 합친 월 상환액이 매달 똑같아요. 계획 세우기 편하지만 원금균등보다 총이자가 조금 더 많아요.',''],
+ ['이자소득세','이자에 붙는 세금 15.4%','예·적금 이자에서 소득세 14% + 지방소득세 1.4% = 15.4%를 떼고 받아요.','이자 10만원 → 실제 수령 84,600원'],
+ ['금 한 돈','금 3.75g','돌반지 한 개가 보통 한 돈이에요. 살 때는 부가세 10%가 붙어서 팔 때보다 훨씬 비싸요.',''],
+ ['김치 프리미엄','국내 코인 가격이 해외보다 비싼 정도','줄여서 \'김프\'. 국내 수요가 몰리면 해외보다 비싸게 거래돼요.',''],
+ ['ETF','주식처럼 사고파는 펀드','여러 종목을 묶은 상품을 주식처럼 쉽게 사고팔 수 있어요. 적은 돈으로 분산투자하기 좋아요.',''],
+ ['배당','회사가 주주에게 나눠주는 이익','이익 일부를 현금으로 주주에게 나눠줘요. 배당수익률 = 1주당 배당금 ÷ 주가.',''],
+ ['순매도','판 금액이 산 금액보다 많은 것','\'외국인 순매도\'는 외국인이 산 것보다 판 게 많다는 뜻이에요. 지수 하락 요인이 돼요.',''],
+ ['네고 물량','수출기업이 파는 달러','수출로 번 달러를 원화로 바꾸려는 물량이에요. 환율이 높을 때 많이 나와 환율을 끌어내려요.',''],
+ ['변동금리 / 고정금리','이자율이 바뀌는지 여부','변동금리는 시장 금리에 따라 이자가 바뀌고, 고정금리는 정해진 기간 동안 그대로예요. 금리 상승기엔 고정이 유리할 수 있어요.','']
+];
+
+/* ============ 2. 유틸 ============ */
+const $ = s=>document.querySelector(s), $$ = s=>[...document.querySelectorAll(s)];
+const store = {
+  get(k,d){try{const v=localStorage.getItem('kcj_'+k);return v?JSON.parse(v):d}catch(e){return d}},
+  set(k,v){try{localStorage.setItem('kcj_'+k,JSON.stringify(v))}catch(e){}}
+};
+function fmt(v,unit){
+  if(typeof v==='string') return v;
+  let d = 2;
+  if(Math.abs(v)>=10000) d=0; else if(unit==='%') d=2; else if(Math.abs(v)>=1000) d=2;
+  if(unit==='원' && Math.abs(v)>=10000) d=0;
+  return v.toLocaleString('ko-KR',{minimumFractionDigits:d,maximumFractionDigits:d});
+}
+function won(n){return Math.round(n).toLocaleString('ko-KR')+'원'}
+function korBig(n){ // 1억 156만
+  n=Math.round(n); if(n<100000000) return n.toLocaleString('ko-KR')+'원';
+  const e=Math.floor(n/1e8), m=Math.round((n%1e8)/1e4);
+  return e+'억 '+(m?m.toLocaleString('ko-KR')+'만':'')+'원';
+}
+function dir(x){return x==null?'flat':x>0?'up':x<0?'down':'flat'}
+function arrow(x){return x>0?'▲':x<0?'▼':'–'}
+function chgText(it){
+  if(it.chg==null && it.pct==null) return '실시간';
+  if(it.chg==null) return `${it.pctLabel?it.pctLabel+' ':''}${it.pct>0?'+':''}${it.pct.toFixed(2)}%`;
+  if(it.pct==null){ if(it.chg===0) return '동결'; return `${arrow(it.chg)} ${Math.abs(it.chg).toFixed(2)}${it.chgUnit||'%p'}`;}
+  const c = Math.abs(it.chg)>=1000? Math.abs(it.chg).toLocaleString('ko-KR') : Math.abs(it.chg).toFixed(2);
+  return `${arrow(it.chg)} ${c} (${it.pct>0?'+':''}${it.pct.toFixed(2)}%)`;
+}
+function valText(it){
+  if(it.unit==='$') return '$'+fmt(it.v,'$');
+  if(it.id==='btc') return korBig(it.v);
+  return fmt(it.v,it.unit)+(it.unit && it.unit!=='$'?`<small>${it.unit}</small>`:'');
+}
+function plainVal(it){ return it.unit==='$'? '$'+fmt(it.v,'$') : fmt(it.v,it.unit)+(it.unit||''); }
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),1800)}
+const byId = id=>ITEMS.find(i=>i.id===id);
+
+/* ============ 3. 김차장 아바타 (오리지널 캐릭터) ============ */
+function kimSVG(size, bg){
+  return `<svg width="${size}" height="${size}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="32" cy="32" r="32" fill="${bg||'#FFE3A8'}"/>
+  <path d="M14 64c1-11 8-17 18-17s17 6 18 17z" fill="#2D3E66"/>
+  <path d="M27 47h10l-5 6z" fill="#fff"/><path d="M30.5 50h3l1.5 12h-6z" fill="#E5383B"/>
+  <ellipse cx="32" cy="31" rx="14" ry="15" fill="#F8D2AE"/>
+  <path d="M17.5 28c-1-10 6-15 14.5-15s15.5 5 14.5 15c-2-5-6-7-9-7-4 0-6 3-11 3-5 0-7-1-9 4z" fill="#2B2B33"/>
+  <circle cx="25.5" cy="31" r="5" fill="none" stroke="#2B2B33" stroke-width="1.8"/>
+  <circle cx="38.5" cy="31" r="5" fill="none" stroke="#2B2B33" stroke-width="1.8"/>
+  <path d="M30.5 31h3" stroke="#2B2B33" stroke-width="1.8"/>
+  <circle cx="25.5" cy="31.5" r="1.5" fill="#2B2B33"/><circle cx="38.5" cy="31.5" r="1.5" fill="#2B2B33"/>
+  <path d="M27 39.5q5 4 10 0" fill="none" stroke="#B5623A" stroke-width="1.8" stroke-linecap="round"/>
+  <circle cx="21" cy="37" r="2" fill="#F4A9A0" opacity=".6"/><circle cx="43" cy="37" r="2" fill="#F4A9A0" opacity=".6"/>
+  </svg>`;
+}
+function paintAvatars(){
+  $('#logoKim').outerHTML = kimSVG(38);
+  $$('svg.kimAvatar').forEach(s=>{const w=s.getAttribute('width');s.outerHTML=kimSVG(w)});
+}
+
+/* ============ 4. 홈 ============ */
+let favs = store.get('favs',['usd','kospi','goldkrx','btc','bok','spx']);
+function sparkPath(it){ // 방향 표시용 미니 그래프(장식)
+  const d=dir(it.pct!=null?it.pct:it.chg); const col=d==='up'?'#E5383B':d==='down'?'#2F6BFF':'#B7BECB';
+  const p=d==='up'?'M0 16 L8 13 L14 15 L22 8 L30 10 L38 3':d==='down'?'M0 3 L8 6 L14 4 L22 11 L30 9 L38 16':'M0 10 L10 9 L20 11 L30 9 L38 10';
+  return `<svg class="spark" width="38" height="19" viewBox="0 0 38 19"><path d="${p}" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+}
+function timeLabel(iso){
+  if(!iso) return ''; const d=new Date(iso); if(isNaN(d)) return String(iso);
+  const n=new Date(); const hm=d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false});
+  return (d.toDateString()===n.toDateString())? hm : `${d.getMonth()+1}/${d.getDate()} ${hm}`;
+}
+function fullStamp(d){ return `${d.getFullYear()}.${d.getMonth()+1}.${d.getDate()} ${d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false})}`; }
+function kstNow(){ const n=new Date(); return new Date(n.getTime()+(n.getTimezoneOffset()+540)*60000); }
+function krxStatus(){ const k=kstNow(), wd=k.getDay(), m=k.getHours()*60+k.getMinutes(); return (wd>=1&&wd<=5&&m>=540&&m<=930)?'장중':'장 마감'; }
+function itemWhen(it){ return it.live? `${timeLabel(it.t)} 기준${it.krx?' · '+krxStatus():''}` : it.cached? `${timeLabel(it.t)} 저장값` : (it.fixed? it.src : '11/9 기준값'); }
+function moveSentence(it){
+  if(it.pct==null) return ''; const p=it.pct;
+  if(Math.abs(p)<0.05) return '전일과 거의 같아요';
+  return `전일보다 ${Math.abs(p).toFixed(2)}% ${p>0?'올랐어요':'내렸어요'}`;
+}
+function buildBrief(){
+  const k=byId('kospi'),u=byId('usd'),sp=byId('spx'),g=byId('goldkrx'),b=byId('btc'); const ev=upcomingEvents()[0];
+  let t=`코스피는 <em>${fmt(k.v,'')}</em>${k.pct!=null?', '+moveSentence(k):''}${k.live?` (${krxStatus()})`:''}. `;
+  t+=`달러 환율은 <em>${fmt(u.v,'원')}원</em>${u.pct!=null?`으로 ${moveSentence(u)}`:'이에요'}. `;
+  t+=sp.pct!=null?`미국 S&P500은 ${moveSentence(sp)}. `:`미국 S&P500은 ${fmt(sp.v,'')}이에요. `;
+  t+=`금 1g은 <em>${won(g.v)}</em>(국제시세 환산), 비트코인은 ${korBig(b.v)}이에요. `;
+  if(ev) t+=`다가오는 일정은 <em>${ev.d} ${ev.t}</em>${ev.dday===0?' (오늘)':` (D-${ev.dday})`}예요.`;
+  return t;
+}
+function renderHome(){
+  $('#briefDate').textContent = liveOK&&lastUpdate ? `${fullStamp(lastUpdate)} 자동 업데이트 · 국내증시 ${krxStatus()}` : (cachedAt? `${fullStamp(new Date(cachedAt))} 저장값 (실시간 연결 안 됨)` : `${SNAP_TIME} (실시간 연결 안 됨)`);
+  $('#briefText').innerHTML = buildBrief();
+  const cd=new Date(CONTENT_CHECKED+'T00:00:00');
+  $('#updIrp').textContent = `2026년 세법 · ${cd.getMonth()+1}/${cd.getDate()} 확인`;
+  const nowD=new Date(); $('#updEv').textContent = `오늘 ${nowD.getMonth()+1}/${nowD.getDate()} 기준`;
+  const uf=$('#updFav');
+  if(liveOK&&lastUpdate){ uf.className='upd live'; uf.textContent=`${timeLabel(lastUpdate.toISOString())} 업데이트`; }
+  else if(cachedAt){ uf.className='upd old'; uf.textContent=`${timeLabel(cachedAt)} 저장값`; }
+  else { uf.className='upd old'; uf.textContent='11/9 기준값 · 연결 전'; }
+  const off=$('#briefOffline');
+  if(liveOK){ off.innerHTML=''; }
+  else { const preview=!/github\.io$/.test(location.hostname);
+    off.innerHTML = (lastTry? `⚠️ 실시간 연결 실패 (${timeLabel(lastTry.toISOString())} 시도). `:'⏳ 실시간 시세 연결 중… ') + (preview? '이 미리보기 화면은 인터넷 연결이 막혀 있어요. QR(공개 주소)로 열면 자동 업데이트돼요. ':'인터넷 연결을 확인해 주세요. ') + '<button data-retry="1">다시 시도</button>'; }
+  $('#favTiles').innerHTML = favs.map(id=>{const it=byId(id); if(!it) return '';
+    const d=dir(it.pct!=null?it.pct:it.chg);
+    return `<button class="tile" data-item="${it.id}"><div class="nm">${it.name}<span class="star on" data-star="${it.id}">★</span></div>
+    <div class="vl">${valText(it)}</div><div class="ch ${d}">${chgText(it)}</div>${sparkPath(it)}</button>`}).join('')
+    + `<button class="tile" data-go="market" style="display:grid;place-items:center;color:var(--sub);font-size:13px;border:1.5px dashed #CFD5E0;background:transparent">+ 지표 추가</button>`;
+  const evs=upcomingEvents(); $('#events').innerHTML = evs.length? evs.map(e=>`<div class="ev"><div class="d">${e.d}<small>${e.dday===0?'오늘':'D-'+e.dday}</small></div><p><b>${e.t}</b><span>${e.s}</span></p></div>`).join('') : '<p class="meta">예정된 일정이 없어요.</p>';
+  const qs=['IRP 세액공제 얼마나 돌려받아?','연금저축이랑 IRP 차이가 뭐야?','IRP 중도인출 되나요?','퇴직금은 IRP로 받는 게 좋아?'];
+  $('#homeQs').innerHTML = qs.map(q=>`<button class="btn line" style="text-align:left;font-weight:500" data-ask="${q}">💬 ${q}</button>`).join('');
+}
+
+/* ============ 5. 시세 ============ */
+let curCat = 'fx';
+function renderMarket(){
+  $('#catChips').innerHTML = CATS.map(c=>`<button class="chip ${c.id===curCat?'on':''}" data-cat="${c.id}">${c.name}</button>`).join('');
+  $('#mktList').innerHTML = ITEMS.filter(i=>i.cat===curCat).map(it=>{
+    const d=dir(it.pct!=null?it.pct:it.chg);
+    return `<button class="row" data-item="${it.id}"><span class="ic">${it.ic}</span><span class="tx"><b>${it.name}</b><small>${it.sub} · ${it.live?'<span style="color:var(--ok)">'+itemWhen(it)+'</span>':itemWhen(it)}</small></span>
+    <span class="nv"><b>${valText(it).replace(/<small>.*<\/small>/,'')}${it.unit&&it.unit!=='$'&&it.id!=='btc'?'<span style="font-size:12px;color:var(--sub);font-weight:400"> '+it.unit+'</span>':''}</b><small class="${d}">${chgText(it)}</small></span></button>`}).join('');
+  $('#mktNote').innerHTML = `📌 ${liveOK?`<b style="color:var(--ok)">자동 업데이트 중</b> · 마지막 ${timeLabel(lastUpdate&&lastUpdate.toISOString())} · 화면을 켜 두면 1분마다 새로 받아와요.`:(cachedAt?`실시간 연결이 안 돼서 마지막으로 받은 값(${timeLabel(cachedAt)})을 보여드려요.`:'실시간 연결이 안 돼서 2026.11.9 기준값을 보여드려요.')} 금리는 결정일 기준이에요. 상승은 <span class="up">빨강</span>, 하락은 <span class="down">파랑</span>. 시세는 수 분 지연될 수 있어요.`;
+}
+function openItem(id){
+  const it=byId(id); const d=dir(it.pct!=null?it.pct:it.chg); const fav=favs.includes(id);
+  $('#sheet').innerHTML = `<div class="grab"></div>
+   <div style="display:flex;justify-content:space-between;align-items:flex-start"><div><h3>${it.ic} ${it.name}</h3><div class="meta">${it.sub}</div></div>
+   <button class="btn line" data-togfav="${id}">${fav?'★ 관심 해제':'☆ 관심 추가'}</button></div>
+   <div class="big">${it.unit==='$'?'$'+fmt(it.v,'$'):(it.id==='btc'?korBig(it.v):fmt(it.v,it.unit)+(it.unit||''))}</div>
+   <div class="${d}" style="font-weight:700">${chgText(it)}</div>
+   <div class="kimsay">${kimSVG(36)}<div><b>김차장 한마디</b><br>${it.kim}</div></div>
+   <div class="meta">출처: ${it.src}<br>기준: ${itemWhen(it)}</div>
+   <div style="display:flex;gap:8px;margin-top:16px">
+     <button class="btn navy block" data-ask="${it.name}">김차장에게 관련 소식 찾아보기</button>
+   </div>`;
+  $('#dim').classList.add('on'); prepSheet();
+}
+let sheetHistory=false;
+function closeSheet(mode){ const fromPop=(mode===true||mode==='pop'), action=(mode==='action');
+  const dim=$('#dim'); if(!dim.classList.contains('on')) return;
+  const sh=$('#sheet'); sh.classList.add('closing'); sh.style.transform='translateY(100%)';
+  setTimeout(()=>{ dim.classList.remove('on'); sh.classList.remove('closing'); sh.style.transform=''; dim.style.background=''; },200);
+  if(sheetHistory && !fromPop && !action){ sheetHistory=false; try{ history.back(); }catch(e){} }
+  sheetHistory=false;
+}
+/* 시트가 열릴 때마다: 손잡이 영역·닫기 버튼을 붙이고, 뒤로가기로 닫히게 기록을 남겨요 */
+function prepSheet(){
+  const sh=$('#sheet'); const g=sh.querySelector('.grab');
+  if(g && !g.parentElement.classList.contains('grabzone')){ const z=document.createElement('div'); z.className='grabzone'; g.replaceWith(z); z.appendChild(g); }
+  if(!sh.querySelector('.sheetx')){ const x=document.createElement('button'); x.className='sheetx'; x.setAttribute('aria-label','닫기'); x.textContent='✕'; x.onclick=()=>closeSheet(); (sh.querySelector('.grabzone')||sh).appendChild(x); }
+  sh.scrollTop=0;
+  if(!sheetHistory){ try{ history.pushState({sheet:1},'',location.href); sheetHistory=true; }catch(e){} }
+}
+window.addEventListener('popstate',()=>{ if($('#dim').classList.contains('on')){ sheetHistory=false; closeSheet(true); } });
+/* 아래로 끌어서 닫기: 손잡이를 잡거나, 내용이 맨 위일 때 아래로 끌면 닫혀요 */
+(function(){
+  let y0=null, dy=0, t0=0, active=false;
+  const sh=()=>$('#sheet');
+  function start(y,target){
+    const el=sh(); const onGrab=!!target.closest('.grabzone');
+    if(!onGrab && el.scrollTop>0) return;
+    if(target.closest('input,select,textarea,a,button:not(.grabzone)') && !onGrab) return;
+    y0=y; dy=0; t0=Date.now(); active=true; el.classList.add('dragging');
+  }
+  function move(y,e){
+    if(!active) return; dy=Math.max(0,y-y0);
+    if(dy>0 && e.cancelable) e.preventDefault();
+    sh().style.transform=`translateY(${dy}px)`;
+    $('#dim').style.background=`rgba(10,16,30,${Math.max(0.05,0.45-dy/800)})`;
+  }
+  function end(){
+    if(!active) return; active=false; const el=sh(); el.classList.remove('dragging');
+    const fast=dy>60 && (Date.now()-t0)<300;
+    if(dy>110||fast){ closeSheet(); }
+    else { el.classList.add('closing'); el.style.transform=''; $('#dim').style.background=''; setTimeout(()=>el.classList.remove('closing'),220); }
+    y0=null; dy=0;
+  }
+  document.addEventListener('touchstart',e=>{ if(e.target.closest('#sheet')) start(e.touches[0].clientY,e.target); },{passive:true});
+  document.addEventListener('touchmove',e=>{ if(active) move(e.touches[0].clientY,e); },{passive:false});
+  document.addEventListener('touchend',end); document.addEventListener('touchcancel',end);
+  document.addEventListener('mousedown',e=>{ if(e.target.closest('#sheet .grabzone')) start(e.clientY,e.target); });
+  document.addEventListener('mousemove',e=>{ if(active) move(e.clientY,e); });
+  document.addEventListener('mouseup',end);
+})();
+
+/* ============ 6. 실시간 자동 업데이트 ============ */
+let liveOK=false, lastUpdate=null, lastTry=null, refreshing=false, cachedAt=null;
+/* 마지막으로 받은 시세를 기기에 저장해 두었다가, 연결이 안 될 때 11/9 기준값 대신 보여줘요 */
+(function loadCache(){ const c=store.get('mkt',null); if(!c||!c.items||!c.at) return;
+  Object.entries(c.items).forEach(([id,d])=>{ const it=byId(id); if(!it||d.v==null) return; Object.assign(it,{v:d.v,chg:d.chg,pct:d.pct,t:d.t,src:d.src,cached:true,pctLabel:''}); });
+  cachedAt=c.at; })();
+async function getJSON(url,ms=6000){
+  const c=new AbortController(); const t=setTimeout(()=>c.abort(),ms);
+  try{const r=await fetch(url,{signal:c.signal,cache:'no-store'}); if(!r.ok) throw 0; return await r.json();} finally{clearTimeout(t)}
+}
+function serverUrl(q){ return searchServer+(searchServer.includes('?')?'&':'?')+q; }
+function setLive(id,v,chg,pct,t,src){ const it=byId(id); if(!it||v==null||!isFinite(v)) return false; it.v=v; it.chg=chg; it.pct=pct; it.pctLabel=''; it.live=true; it.cached=false; it.t=t||new Date().toISOString(); it.src=src; return true; }
+async function refreshLive(manual){
+  if(refreshing) return; refreshing=true;
+  const btn=$('#refreshBtn'); btn.classList.add('spin');
+  let fromServer=0;
+  // 1) 데이터 서버 (코스피·미국지수·환율·금·유가·코인)
+  if(searchServer){
+    try{ const r=await getJSON(serverUrl('type=market&t='+Date.now()),15000);
+      if(r&&r.items) Object.entries(r.items).forEach(([id,d])=>{ if(setLive(id,d.price,d.chg,d.pct,d.time||r.asOf,d.src)) fromServer++; });
+    }catch(e){}
+  }
+  // 2) 서버가 없거나 빠진 항목은 브라우저에서 직접 (업비트·환율)
+  if(!byId('btc').live||!fromServer){
+    try{ const up=await getJSON('https://api.upbit.com/v1/ticker?markets=KRW-BTC,KRW-ETH');
+      up.forEach(t=>setLive(t.market==='KRW-BTC'?'btc':'eth',t.trade_price,t.signed_change_price,t.signed_change_rate*100,new Date(t.trade_timestamp||t.timestamp).toISOString(),'업비트'));
+    }catch(e){}
+  }
+  if(!byId('usd').live||!fromServer){
+    try{ const fx=await getJSON('https://open.er-api.com/v6/latest/USD');
+      if(fx&&fx.rates&&fx.rates.KRW){ const k=fx.rates.KRW, t=fx.time_last_update_unix?new Date(fx.time_last_update_unix*1000).toISOString():null;
+        [['usd',k],['jpy',k/fx.rates.JPY*100],['eur',k/fx.rates.EUR],['cny',k/fx.rates.CNY]].forEach(([id,v])=>{ if(!fromServer||!byId(id).live) setLive(id,Math.round(v*100)/100,null,null,t,'ExchangeRate-API (하루 1회 갱신)'); }); }
+    }catch(e){}
+  }
+  // 3) 원화 금값 = 국제 금(달러/온스) × 원·달러 환율 ÷ 31.1035g
+  const gi=byId('goldint'), u=byId('usd');
+  if(gi.live&&u.live){
+    const OZ=31.1034768, now=gi.v*u.v/OZ;
+    const prev=(gi.chg!=null&&u.chg!=null)? (gi.v-gi.chg)*(u.v-u.chg)/OZ : null;
+    const ch=prev?now-prev:null, pc=prev?(now/prev-1)*100:null, src='국제 금 시세 × 원·달러 환율 환산';
+    setLive('goldkrx',Math.round(now),ch!=null?Math.round(ch):null,pc,gi.t,src);
+    setLive('golddon',Math.round(now*3.75),ch!=null?Math.round(ch*3.75):null,pc,gi.t,src);
+  }
+  lastTry=new Date();
+  liveOK=ITEMS.some(i=>i.live); if(liveOK){ lastUpdate=new Date();
+    const save={}; ITEMS.filter(i=>i.live).forEach(i=>save[i.id]={v:i.v,chg:i.chg,pct:i.pct,t:i.t,src:i.src});
+    store.set('mkt',{at:lastUpdate.toISOString(),items:save}); }
+  btn.classList.remove('spin');
+  const pill=$('#statusPill'); pill.style.display=''; pill.classList.toggle('live',liveOK);
+  $('#statusTxt').textContent = liveOK? lastUpdate.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false}) : '연결 안 됨'; pill.title = liveOK? '자동 업데이트됨':'실시간 연결 전 (11/9 기준값)';
+  if(manual) toast(liveOK?(fromServer?'최신 시세로 업데이트했어요':'코인·환율만 업데이트했어요 (데이터 서버 미연결)'):'지금은 인터넷 연결이 막혀 있어 기준값을 보여드려요');
+  renderAll(); refreshing=false;
+}
+/* 화면을 켜 두면 1분마다, 앱으로 돌아오면 바로 새로고침 */
+setInterval(()=>{ if(document.visibilityState==='visible') refreshLive(false); },60000);
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible'){ checkVersion(); if(!lastUpdate || Date.now()-lastUpdate.getTime()>30000) refreshLive(false); } });
+/* 뒤로가기·탭 복원으로 예전 화면이 그대로 나올 때도 새로 확인 */
+window.addEventListener('pageshow',e=>{ if(e.persisted){ checkVersion(); refreshLive(false); } });
+setInterval(()=>{ if(document.visibilityState==='visible') checkVersion(); },10*60000);
+
+/* ============ 7. 계산기 ============ */
+let calcMode='irp', calcPreset=null;
+const FX_OPTS=[['usd','달러(USD)',1],['jpy','엔(100엔)',100],['eur','유로(EUR)',1],['cny','위안(CNY)',1]];
+function renderCalc(){
+  $$('#calcSeg button').forEach(b=>b.classList.toggle('on',b.dataset.c===calcMode));
+  const box=$('#calcBox');
+  if(calcMode==='irp'){
+    box.innerHTML=`<div class="fld"><label>소득 구분</label><div class="in"><select id="irpInc"><option value="low">총급여 5,500만원 이하 (종합소득 4,500만원 이하)</option><option value="high">총급여 5,500만원 초과</option></select></div></div>
+      <div class="two"><div class="fld"><label>올해 연금저축 납입</label><div class="in"><input id="irpPs" type="number" inputmode="numeric" value="0"><span class="u">원</span></div></div>
+      <div class="fld"><label>올해 IRP 납입</label><div class="in"><input id="irpIrp" type="number" inputmode="numeric" value="3000000"><span class="u">원</span></div></div></div>
+      <div class="fld"><label>ISA 만기자금 이전액 (선택)</label><div class="in"><input id="irpIsa" type="number" inputmode="numeric" value="0"><span class="u">원</span></div></div>
+      <div class="result" id="irpRes"></div>
+      <h2 class="sec" style="margin-top:20px">노후 적립 예시 <span>단순 계산 · 수익 보장 아님</span></h2>
+      <div class="two"><div class="fld"><label>앞으로 납입 기간</label><div class="in"><input id="irpYears" type="number" inputmode="numeric" value="20"><span class="u">년</span></div></div>
+      <div class="fld"><label>예시 연 수익률</label><div class="in"><input id="irpRet" type="number" inputmode="decimal" value="3" step="0.5"><span class="u">%</span></div></div></div>
+      <div class="result" id="irpSim"></div>`;
+  }else if(calcMode==='fx'){
+    box.innerHTML=`<div class="two"><div class="fld"><label>통화</label><div class="in"><select id="fxCur">${FX_OPTS.map(o=>`<option value="${o[0]}">${o[1]}</option>`).join('')}</select></div></div>
+      <div class="fld"><label>환전 방향</label><div class="in"><select id="fxDir"><option value="buy">원화 → 외화 (살 때)</option><option value="sell">외화 → 원화 (팔 때)</option></select></div></div></div>
+      <div class="fld"><label id="fxAmtLbl">필요한 외화 금액</label><div class="in"><input id="fxAmt" type="number" inputmode="decimal" value="1000"><span class="u" id="fxU">USD</span></div></div>
+      <div class="fld"><label>환율 우대율 (은행·앱 이벤트)</label><div class="in"><input id="fxPref" type="number" inputmode="numeric" value="50" min="0" max="100"><span class="u">%</span></div></div>
+      <div class="result" id="fxRes"></div>`;
+  }else if(calcMode==='save'){
+    box.innerHTML=`<div class="seg" style="margin-bottom:12px" id="saveSeg"><button data-s="dep" class="on">정기예금</button><button data-s="ins">정기적금</button></div>
+      <div class="fld"><label id="svLbl">맡길 금액</label><div class="in"><input id="svAmt" type="number" inputmode="numeric" value="10000000"><span class="u">원</span></div></div>
+      <div class="two"><div class="fld"><label>기간</label><div class="in"><input id="svN" type="number" inputmode="numeric" value="12"><span class="u">개월</span></div></div>
+      <div class="fld"><label>연 이율</label><div class="in"><input id="svR" type="number" inputmode="decimal" value="3.0" step="0.1"><span class="u">%</span></div></div></div>
+      <div class="fld"><label>세금</label><div class="in"><select id="svTax"><option value="std">일반과세 (15.4%)</option><option value="free">비과세 (청년미래적금 등)</option></select></div></div>
+      <div class="result" id="svRes"></div>`;
+    box.dataset.s=box.dataset.s||'dep';
+  }else{
+    box.innerHTML=`<div class="fld"><label>대출 원금</label><div class="in"><input id="lnP" type="number" inputmode="numeric" value="300000000"><span class="u">원</span></div></div>
+      <div class="two"><div class="fld"><label>연 이율</label><div class="in"><input id="lnR" type="number" inputmode="decimal" value="4.2" step="0.05"><span class="u">%</span></div></div>
+      <div class="fld"><label>기간</label><div class="in"><input id="lnN" type="number" inputmode="numeric" value="30"><span class="u">년</span></div></div></div>
+      <div class="fld"><label>상환 방식</label><div class="in"><select id="lnM"><option value="eq">원리금균등 (매달 같은 금액)</option><option value="pr">원금균등 (원금을 똑같이)</option><option value="bul">만기일시 (이자만 내다 마지막에 원금)</option></select></div></div>
+      <div class="result" id="lnRes"></div>`;
+  }
+  if(calcPreset && calcPreset.mode===calcMode){
+    const P=calcPreset; const set=(id,v)=>{const e=document.getElementById(id); if(e!=null&&v!=null) e.value=v;};
+    if(P.s){ box.dataset.s=P.s; }
+    set('svAmt',P.amt); set('svTax',P.tax); set('irpInc',P.inc); set('irpPs',P.ps); set('irpIrp',P.irp); set('irpIsa',P.isa); set('svN',P.n); set('svR',P.r); set('lnP',P.amt); set('lnR',P.r); set('lnN',P.years);
+  }
+  calcPreset=null;
+  calc();
+}
+function calc(){
+  if(calcMode==='irp'){
+    const rate=$('#irpInc').value==='low'?0.165:0.132;
+    const ps=Math.max(0,+$('#irpPs').value||0), irp=Math.max(0,+$('#irpIrp').value||0), isa=Math.max(0,+$('#irpIsa').value||0);
+    const psCount=Math.min(ps,6000000); const base=Math.min(psCount+irp,9000000);
+    const isaExtra=Math.min(isa*0.1,3000000); const refund=(base+isaExtra)*rate;
+    const left=9000000-base; const total=ps+irp;
+    $('#irpRes').innerHTML=`<div class="k">올해 예상 세액공제 (환급 효과)</div><div class="v">${won(refund)}</div>
+     <div class="r"><span>공제 대상 금액</span><span>${won(base)}${isaExtra?` + ISA ${won(isaExtra)}`:''}</span></div>
+     <div class="r"><span>공제율</span><span>${(rate*100).toFixed(1)}%</span></div>
+     ${ps>6000000?`<div class="r"><span>연금저축 중 공제 안 되는 금액</span><span>${won(ps-6000000)}</span></div>`:''}
+     <div class="r"><span>남은 공제 한도</span><span>${won(left)}</span></div>
+     <div class="tip">💡 ${left>0?`12월 31일까지 IRP에 <b>${won(left)}</b>을 더 넣으면 최대 <b>${won(left*rate)}</b>을 더 돌려받을 수 있어요. `:'공제 한도 900만원을 꽉 채우셨어요! '}${total>18000000?'⚠️ 연금계좌 연간 납입 한도(합산 1,800만원)를 넘었어요. ':''}실제 환급은 내가 낸 세금(결정세액) 안에서만 돼요. 연금저축은 600만원까지만 인정돼요.</div>`;
+    const yrs=Math.max(0,+$('#irpYears').value||0), r=(+$('#irpRet').value||0)/100, yearly=Math.min(total,18000000);
+    let bal=0; for(let i=0;i<yrs;i++){ bal=(bal+yearly)*(1+r); }
+    const yearlyRefund=Math.min(Math.min(ps,6000000)+irp,9000000)*rate;
+    const pay10=bal/10; const net=pay10*(1-0.055);
+    $('#irpSim').innerHTML=`<div class="k">${yrs}년 뒤 예상 적립금 (매년 ${won(yearly)} 납입)</div><div class="v">${won(bal)}</div>
+     <div class="r"><span>그동안 낸 원금</span><span>${won(yearly*yrs)}</span></div>
+     <div class="r"><span>그동안 받는 세액공제 (매년 같다고 가정)</span><span>${won(yearlyRefund*yrs)}</span></div>
+     <div class="r"><span>10년 나눠 받을 때 월 수령액 (세전)</span><span>${won(pay10/12)}</span></div>
+     <div class="r"><span>연금소득세 5.5% 뺀 월 수령액</span><span>${won(net/12)}</span></div>
+     <div class="tip">⚠️ 수익률을 매년 똑같다고 가정한 단순 예시예요. 실제 수익은 오르내리고, 원금 손실이 날 수도 있어요. 수령 중 운용수익과 퇴직금 재원은 따로 계산하지 않았어요.</div>`;
+    return;
+  }
+  if(calcMode==='fx'){
+    const id=$('#fxCur').value, o=FX_OPTS.find(x=>x[0]===id), it=byId(id), dirv=$('#fxDir').value;
+    const amt=+$('#fxAmt').value||0, pref=Math.min(100,Math.max(0,+$('#fxPref').value||0))/100;
+    $('#fxU').textContent=id==='jpy'?'엔':id.toUpperCase(); $('#fxAmtLbl').textContent=dirv==='buy'?'필요한 외화 금액':'팔 외화 금액';
+    const base=it.v/o[2]; const spread=id==='cny'?0.05:0.0175; const fee=spread*(1-pref);
+    const rate=dirv==='buy'?base*(1+fee):base*(1-fee);
+    const krw=amt*rate, noPref=amt*base*(dirv==='buy'?1+spread:1-spread);
+    $('#fxRes').innerHTML=`<div class="k">${dirv==='buy'?'필요한 원화':'받을 원화'} (현찰, 추정)</div><div class="v">${won(krw)}</div>
+     <div class="r"><span>매매기준율</span><span>${(it.v).toLocaleString('ko-KR',{maximumFractionDigits:2})}원${id==='jpy'?' /100엔':''}</span></div>
+     <div class="r"><span>적용 환율 (우대 ${Math.round(pref*100)}%)</span><span>${(rate*o[2]).toLocaleString('ko-KR',{maximumFractionDigits:2})}원</span></div>
+     <div class="r"><span>우대 덕분에 아낀 돈</span><span>${won(Math.abs(noPref-krw))}</span></div>
+     <div class="tip">💡 은행 현찰 수수료는 보통 ${id==='cny'?'5%':'1.75%'} 수준이에요. 앱 환전·우대쿠폰을 쓰면 아낄 수 있어요. 실제 금액은 은행마다 달라요.</div>`;
+  }else if(calcMode==='save'){
+    const s=$('#calcBox').dataset.s; $$('#saveSeg button').forEach(b=>b.classList.toggle('on',b.dataset.s===s));
+    $('#svLbl').textContent=s==='dep'?'맡길 금액':'매달 넣을 금액';
+    const a=+$('#svAmt').value||0, n=+$('#svN').value||0, r=(+$('#svR').value||0)/100;
+    const principal = s==='dep'? a : a*n;
+    const interest = s==='dep'? a*r*n/12 : a*(r/12)*n*(n+1)/2;
+    const taxFree=($('#svTax')&&$('#svTax').value==='free'); const tax=taxFree?0:Math.floor(interest*0.154/10)*10;
+    $('#svRes').innerHTML=`<div class="k">만기에 받는 돈 (세후)</div><div class="v">${won(principal+interest-tax)}</div>
+     <div class="r"><span>원금 합계</span><span>${won(principal)}</span></div>
+     <div class="r"><span>세전 이자 (단리)</span><span>${won(interest)}</span></div>
+     <div class="r"><span>${taxFree?'이자소득세 (비과세)':'이자소득세 15.4%'}</span><span>- ${won(tax)}</span></div>
+     <div class="tip">💡 ${taxFree&&s==='ins'?'청년미래적금은 여기에 정부기여금(일반형 납입액의 6%, 우대형 12%)이 따로 더해져요. 8.0%는 우대조건을 모두 채운 최고 금리 기준이에요. ':''}${s==='ins'?'적금은 매달 넣은 돈마다 이자 기간이 달라서, 같은 연 이율이라도 실제 이자는 예금의 약 절반 수준이에요.':'목돈은 예금, 매달 모으는 돈은 적금! 비과세종합저축 대상이면 세금이 없어요.'}</div>`;
+  }else{
+    const P=+$('#lnP').value||0, R=(+$('#lnR').value||0)/100, N=(+$('#lnN').value||0)*12, m=$('#lnM').value;
+    const sim=(rate)=>{const i=rate/12; if(!N) return {first:0,total:0};
+      if(m==='eq'){const pay=i?P*i*Math.pow(1+i,N)/(Math.pow(1+i,N)-1):P/N; return {first:pay,total:pay*N-P}}
+      if(m==='pr'){return {first:P/N+P*i,total:P*i*(N+1)/2}}
+      return {first:P*i,total:P*i*N}};
+    const a=sim(R), b=sim(R+0.0025);
+    $('#lnRes').innerHTML=`<div class="k">${m==='pr'?'첫 달 상환액':'매달 상환액'}</div><div class="v">${won(a.first)}</div>
+     <div class="r"><span>총 이자</span><span>${won(a.total)}</span></div>
+     <div class="r"><span>총 상환액</span><span>${won(a.total+P)}</span></div>
+     <div class="tip">⚠️ 금리가 0.25%p만 올라도 월 <b>${won(b.first-a.first)}</b>, 전체 기간 <b>${won(b.total-a.total)}</b> 더 내요. 11/26 금통위 결과를 꼭 확인하세요!</div>`;
+  }
+}
+
+/* ============ 8. 용어사전 ============ */
+function renderDict(q=''){
+  q=q.trim().toLowerCase();
+  const list=TERMS.filter(t=>!q||t.join(' ').toLowerCase().includes(q));
+  $('#dictList').innerHTML = list.length? list.map(t=>`<details class="term"><summary><span>${t[0]}<small>${t[1]}</small></span></summary>
+    <p>${t[2]}${t[3]?`<span class="ex">예) ${t[3]}</span>`:''}</p><button data-ask="${t[0].split(' ')[0]}">관련 뉴스·자료 찾아보기 →</button></details>`).join('')
+    : `<div class="card" style="text-align:center;color:var(--sub)">찾는 용어가 없어요.<br><button class="btn navy" style="margin-top:10px" data-ask="${q}">김차장에게 찾아보기</button></div>`;
+}
+
+
+/* ============ 8-1. 개인형 IRP 안내 (2026년 세법 기준) ============ */
+const PCATS=[['all','전체'],['basic','기본'],['tax','절세'],['invest','운용'],['out','인출·수령'],['manage','계좌 관리']];
+const PRODUCTS=[
+ {id:'irp-what', cat:'basic', name:'개인형 IRP란?', tags:['기본','누구나'], rate:'소득 있으면 누구나', rateNote:'근로자·자영업자·공무원 등', asof:'2026년 기준', for:['nops','all'], calc:null,
+  desc:'노후 자금을 모으면서 세금 혜택을 받는 개인 퇴직연금 계좌', who:'소득이 있는 근로자·자영업자·공무원 등', period:'만 55세 이후 연금 수령', amount:'연금저축과 합산 연 1,800만원까지 납입',
+  table:[['연간 납입 한도','연금저축 합산 1,800만원'],['세액공제 한도','연금저축 합산 900만원'],['연금 수령 시작','만 55세 이후 (가입 5년 이상)'],['가입 기관','은행·증권사·보험사']],
+  perks:['퇴직금을 받는 계좌로도 쓰여요 (퇴직금 이전)','예금 같은 원리금 보장 상품과 펀드·ETF를 섞어 담을 수 있어요','운용 중 생긴 수익엔 바로 세금이 붙지 않고, 나중에 받을 때 낮은 세율로 내요'],
+  kim:'한마디로 "세금 돌려받으면서 노후 자금 모으는 통장"이에요. 대신 55세 전에는 꺼내기 어렵다는 점, 꼭 기억하세요!',
+  src:[['ambitstock IRP 가이드','https://policy.ambitstock.com/posts/irp-tax-deduction-2026-guide/'],['make2t 2026 한도','https://www.make2t.kr/2026/11/irp-tax-credit-limit-check-2026.html']]},
+ {id:'irp-tax', cat:'tax', name:'세액공제 900만원', tags:['절세','연말정산'], rate:'최대 148.5만원', rateNote:'총급여 5,500만원 이하 · 900만원 납입 시', asof:'2026년 귀속', for:['worker','self','ps','nops'], calc:{mode:'irp',inc:'low',ps:0,irp:9000000,isa:0},
+  desc:'연금저축과 합쳐 연 900만원까지 납입액의 13.2~16.5%를 돌려받아요', who:'연말정산·종합소득세 신고 대상자', period:'2026.1.1~12.31 납입분', amount:'공제 대상 최대 900만원',
+  table:[['연금저축 단독','600만원까지'],['IRP 포함 합산','900만원까지'],['총급여 5,500만원 이하','16.5% → 최대 148.5만원'],['총급여 5,500만원 초과','13.2% → 최대 118.8만원']],
+  perks:['종합소득 4,500만원 이하인 자영업자도 16.5%','12월 31일까지 넣은 돈만 올해 공제돼요','실제 환급은 내가 낸 세금(결정세액) 안에서만 돼요'],
+  kim:'연말이 다가오면 가장 먼저 챙길 부분이에요. 연금저축에 600만원을 넣었다면 IRP에 300만원만 더 넣어도 한도가 꽉 차요!',
+  src:[['더택스 칼럼','https://thr-tax.co.kr/columns/view/7075'],['make2t 2026 한도','https://www.make2t.kr/2026/11/irp-tax-credit-limit-check-2026.html']]},
+ {id:'irp-combo', cat:'tax', name:'연금저축 vs IRP', tags:['비교'], rate:'600 + 300', rateNote:'연금저축 600만 + IRP 300만', asof:'2026년 기준', for:['ps','nops','worker','self'], calc:{mode:'irp',inc:'low',ps:6000000,irp:3000000,isa:0},
+  desc:'둘 다 세액공제율은 같고, 꺼내 쓰기와 투자 자유도가 달라요', who:'연금 계좌를 처음 만들거나 나눠 넣으려는 분', period:'-', amount:'-',
+  table:[['세액공제 한도','연금저축 600만 / IRP 합산 900만'],['위험자산 투자','연금저축 제한 없음 / IRP 70%까지'],['중도 인출','연금저축 부분 인출 가능 / IRP 법정 사유만'],['예금 담기','연금저축 어려움 / IRP 가능'],['퇴직금 받기','연금저축 불가 / IRP 가능']],
+  perks:['흔한 조합: 연금저축 600만원 + IRP 300만원','급하게 꺼낼 수도 있는 돈은 연금저축 쪽이 유연해요','안정적으로 굴리고 싶다면 예금을 담을 수 있는 IRP가 편해요'],
+  kim:'정답은 없어요. "중간에 꺼낼 가능성"이 있으면 연금저축을 먼저, 오래 묻어둘 돈이면 IRP를 더 써도 좋아요.',
+  src:[['make2t 연금저축·IRP 차이','https://www.make2t.kr/2026/11/pension-savings-irp-tax-credit-2026.html'],['bullstory 3종 비교','https://bullstory.io/blog/연금저축-계좌-irp-차이-isa까지-3종-비교와-세액공제-900만원-전략']]},
+ {id:'irp-isa', cat:'tax', name:'ISA 만기자금 옮기기', tags:['절세','ISA'], rate:'추가 최대 300만원', rateNote:'옮긴 금액의 10% 추가 공제 대상', asof:'2026년 기준', for:['worker','self','active'], calc:{mode:'irp',inc:'low',ps:6000000,irp:3000000,isa:30000000},
+  desc:'만기된 ISA 돈을 연금계좌로 옮기면 공제 한도가 더 늘어나요', who:'ISA 만기(또는 만기 예정) 고객', period:'만기 후 정해진 기간 안에 이전', amount:'이전액의 10%, 최대 300만원',
+  table:[['추가 공제 대상','이전액의 10%'],['추가 한도','최대 300만원'],['16.5% 적용 시','최대 49.5만원 추가 환급']],
+  perks:['기본 900만원 한도와 별도로 더해져요','세부 기한과 요건은 가입 금융회사에서 확인하세요'],
+  kim:'ISA가 끝났다면 그냥 찾지 말고 연금계좌로 옮기는 것도 생각해 보세요. 세금을 한 번 더 돌려받을 수 있어요.',
+  src:[['make2t 900만원 채우는 법','https://www.make2t.kr/2026/11/pension-irp-tax-credit-deposit-2026.html']]},
+ {id:'irp-invest', cat:'invest', name:'위험자산 70% 규칙', tags:['운용'], rate:'70%까지', rateNote:'펀드·ETF 등 원금 비보장 상품', asof:'2026년 기준', for:['active','mid'], calc:null,
+  desc:'IRP 적립금의 최대 70%까지만 주식형 펀드·ETF에 담을 수 있어요', who:'IRP 가입자', period:'-', amount:'-',
+  table:[['원금 비보장(펀드·ETF)','최대 70%'],['원리금 보장(예금 등)','최소 30%'],['디폴트옵션 상품','70% 한도 예외'],['국내 상장주식 직접 투자','불가']],
+  perks:['ETF는 일반 주식 계좌처럼 실시간 가격 지정이 안 되고, 계좌 안 현금으로 주문해요','노후 자금이 한 번에 크게 흔들리지 않도록 만든 안전장치예요'],
+  kim:'공격적으로 굴리고 싶어도 30%는 안전자산에 둬야 해요. 그래서 "안전벨트 규칙"이라고 부르기도 해요.',
+  src:[['tilnote 70% 규정','https://tilnote.io/pages/69890f6e46fd46c976ee25ca'],['bullstory 3종 비교','https://bullstory.io/blog/연금저축-계좌-irp-차이-isa까지-3종-비교와-세액공제-900만원-전략']]},
+ {id:'irp-default', cat:'invest', name:'디폴트옵션 (사전지정운용)', tags:['자동 운용'], rate:'정부 승인 상품', rateNote:'고용노동부·금감원 심사', asof:'2026년 기준', for:['safe','mid'], calc:null,
+  desc:'운용 지시를 안 하면 미리 골라둔 상품으로 자동 투자돼요', who:'IRP 가입자', period:'일정 기간 운용 지시가 없을 때 적용', amount:'-',
+  table:[['적용 시점','일정 기간 운용 지시가 없을 때'],['상품','정부가 심사·승인한 포트폴리오'],['위험자산 70% 한도','적용 안 됨']],
+  perks:['투자 성향(안정·중립·적극)에 맞는 포트폴리오를 골라 두세요','IRP에 돈을 넣고 그냥 현금으로 두는 실수를 막아줘요'],
+  kim:'IRP에 돈만 넣고 아무것도 안 사 두면 수익이 거의 없어요. 바쁘다면 디폴트옵션이라도 꼭 지정해 두세요!',
+  src:[['은행 IRP 운용 안내 (디폴트옵션)','https://obank.kbstar.com/products/kb-irp-investment.html']]},
+ {id:'irp-fee', cat:'manage', name:'수수료 꼼꼼히 보기', tags:['수수료'], rate:'비대면 무료 늘어남', rateNote:'단, 상품 보수는 별도', asof:'2026년 기준', for:['all'], calc:null,
+  desc:'"수수료 무료"라도 펀드·ETF 자체 비용은 따로 나가요', who:'IRP 가입·이전 고려 중인 분', period:'-', amount:'-',
+  table:[['면제되는 것 (보통)','운용관리·자산관리 수수료'],['따로 드는 것','펀드 운용·판매보수, ETF 총보수, 거래 비용']],
+  perks:['20년 넘게 굴리면 작은 수수료 차이가 수백만원이 될 수 있어요','금융감독원 통합연금포털에서 회사별 수익률·수수료를 비교할 수 있어요'],
+  kim:'"무료"라는 말만 보고 고르지 말고, 내가 살 펀드·ETF의 보수까지 같이 보세요.',
+  src:[['다음 재테크루 (2026.8)','https://v.daum.net/v/20260801090033696'],['통합연금포털','https://100lifeplan.fss.or.kr']]},
+ {id:'irp-move', cat:'manage', name:'실물이전으로 갈아타기', tags:['계좌 이전'], rate:'상품 그대로 이전', rateNote:'팔지 않고 옮기기', asof:'2026년 기준', for:['ps','retire','active'], calc:null,
+  desc:'수수료나 상품이 마음에 안 들면 다른 금융회사로 옮길 수 있어요', who:'기존 IRP·연금저축 가입자', period:'-', amount:'-',
+  table:[['1단계','옮겨갈 회사에 같은 종류 계좌(IRP→IRP) 만들기'],['2단계','새 회사 앱에서 "실물이전" 신청'],['3단계','사전조회로 옮길 수 있는 상품 확인']],
+  perks:['기존 회사에 따로 전화하지 않아도 돼요','옮길 수 없는 상품은 현금으로 바뀔 수 있으니 사전조회 화면을 꼭 확인하세요'],
+  kim:'옮기려고 상품을 다 팔면 그사이 시장이 오를 때 손해를 볼 수 있어요. 실물이전이 되는지 먼저 확인하세요.',
+  src:[['wikidocs 실물이전','https://wikidocs.net/blog/@Insight_Lab/28092/']]},
+ {id:'irp-withdraw', cat:'out', name:'중도인출은 법정 사유만', tags:['주의'], rate:'일반 해지 16.5%', rateNote:'세액공제분+수익에 기타소득세', asof:'2026년 기준', for:['worker','self'], calc:null,
+  desc:'IRP는 일부만 꺼내 쓸 수 없고, 정해진 사유가 아니면 해지해야 해요', who:'IRP 가입자', period:'-', amount:'-',
+  table:[['무주택자 본인 명의 주택 구입','인출 가능'],['무주택자 전세금·임차보증금','인출 가능'],['본인·가족 6개월 이상 요양','인출 가능'],['파산·개인회생, 천재지변 등','인출 가능'],['실직·폐업','사유 아님 → 해지 필요']],
+  perks:['법정 사유면 16.5% 대신 연금소득세 3.3~5.5% 수준으로 낮아져요','세액공제를 안 받은 원금은 꺼내도 세금이 없어요','사유 해당 여부는 가입 금융회사에 먼저 확인하세요'],
+  kim:'"급하면 깨지 뭐" 했다가 돌려받은 세금보다 더 많이 낼 수 있어요. 비상금은 IRP 밖에 따로 두세요.',
+  src:[['wikidocs 중도인출 정리','https://wikidocs.net/blog/@Insight_Lab/22669/'],['tilnote 중도인출 사유','https://tilnote.io/pages/6ae007e3013760421afce8c6']]},
+ {id:'irp-pension', cat:'out', name:'연금으로 받을 때 세금', tags:['연금 수령'], rate:'3.3~5.5%', rateNote:'나이가 많을수록 낮아짐', asof:'2026년 기준', for:['senior','retire'], calc:null,
+  desc:'세액공제 받은 돈과 운용수익은 연금으로 받으면 낮은 세율이 붙어요', who:'만 55세 이후 연금 수령자', period:'-', amount:'-',
+  table:[['만 55~69세','5.5%'],['만 70~79세','4.4%'],['만 80세 이상','3.3%'],['일시금·연금 외 수령','16.5% (기타소득세)']],
+  perks:['사적연금을 1년에 1,500만원 넘게 받으면 16.5% 분리과세나 종합과세 중 골라야 해요','연금 받는 기간을 길게 잡으면 세금 부담을 나눌 수 있어요'],
+  kim:'같은 돈이라도 "어떻게 받느냐"에 따라 세금이 3배 넘게 차이 나요. 수령 계획을 미리 세워 두세요.',
+  src:[['wikidocs 50대 수령 전략','https://wikidocs.net/blog/@knarchive/15457/'],['다음 은퇴 레시피','https://v.daum.net/v/KlklY9tW7g']]},
+ {id:'irp-retire', cat:'out', name:'퇴직금은 IRP로 받기', tags:['퇴직금'], rate:'퇴직소득세 30~50% 감면', rateNote:'연금으로 나눠 받을 때', asof:'2026년 개정세법 반영', for:['retire','worker'], calc:null,
+  desc:'퇴직금을 IRP에 넣어 연금으로 받으면 퇴직소득세가 줄어요', who:'퇴직(예정)자', period:'-', amount:'-',
+  table:[['일시금으로 받기','퇴직소득세 100%'],['연금 수령 1~10년차','70%만 부과 (30% 감면)'],['연금 수령 11년차부터','60%만 부과 (40% 감면)'],['연금 수령 21년차부터','50%만 부과 (50% 감면, 2026 개정)']],
+  perks:['감면은 퇴직금 원금 부분에만 적용돼요','IRP 안에서 늘어난 수익은 받을 때 연금소득세가 따로 붙어요'],
+  kim:'퇴직금을 바로 다 찾기보다, 필요한 만큼만 쓰고 나머지는 연금으로 받으면 세금을 꽤 아낄 수 있어요.',
+  src:[['한화투자증권 연금 세제','https://www.hanwhawm.com/static/pension/PS410_3p.htm'],['tilnote 2026 감면 확대','https://tilnote.io/pages/69b63771a94db6d7036be3c8']]}
+];
+const pById=id=>PRODUCTS.find(p=>p.id===id);
+let prodCat='all', finderAns=store.get('irpFinder',{});
+const FINDER=[
+ {k:'situ',q:'지금 어떤 상황인가요?',o:[['worker','직장인'],['self','자영업·프리랜서'],['retire','퇴직(예정)'],['senior','만 55세 이상']]},
+ {k:'ps',q:'연금저축 계좌가 있나요?',o:[['ps','있어요'],['nops','없어요']]},
+ {k:'style',q:'돈을 굴리는 성향은요?',o:[['safe','안정형'],['mid','중립형'],['active','적극형']]}
+];
+function finderScore(p){
+  const a=finderAns; let sc=0; const f=p.for||[];
+  Object.values(a).forEach(v=>{ if(f.includes(v)) sc+=2; });
+  if(f.includes('all')) sc+=1;
+  return sc;
+}
+function renderFinder(){
+  $('#finder').innerHTML=`<h3>${kimSVG(30)} 나에게 맞는 IRP 활용법 찾기</h3>`+FINDER.map(f=>`<p class="q">${f.q}</p><div class="opts">${f.o.map(([v,l])=>`<button data-fk="${f.k}" data-fv="${v}" class="${finderAns[f.k]===v?'on':''}">${l}</button>`).join('')}</div>`).join('')
+   +(Object.keys(finderAns).length?`<p class="q" style="margin-top:12px"><button class="btn line" style="padding:6px 12px;font-size:12px" data-freset="1">다시 고르기</button></p>`:'');
+}
+function rateHTML(p){return `<div class="rt"><b>${p.rate}</b><small>${p.rateNote}</small></div>`}
+function pcardHTML(p,hl){
+  return `<button class="pcard ${hl?'hl':''}" data-prod="${p.id}">
+   <span class="tag">${PCATS.find(c=>c[0]===p.cat)[1]}</span>${p.tags.filter(t=>t!==PCATS.find(c=>c[0]===p.cat)[1]).slice(0,2).map(t=>`<span class="tag y">${t}</span>`).join('')}
+   <h4>${p.name}</h4><div class="d">${p.desc}</div>${rateHTML(p)}
+   ${hl?'<div class="match">✓ 지금 상황에 꼭 맞는 내용</div>':''}</button>`;
+}
+function renderProducts(){
+  const ic=$('#irpChecked'); if(ic) ic.textContent=CONTENT_CHECKED.replace(/-/g,'.');
+  renderFinder();
+  $('#prodChips').innerHTML=PCATS.map(([id,n])=>`<button class="chip ${id===prodCat?'on':''}" data-pcat="${id}">${n}</button>`).join('');
+  const hasAns=Object.keys(finderAns).length>0;
+  let list=PRODUCTS.filter(p=>prodCat==='all'||p.cat===prodCat).map(p=>({p,sc:hasAns?finderScore(p):0}));
+  if(hasAns){ list=list.sort((a,b)=>b.sc-a.sc); }
+  $('#prodList').innerHTML = list.length? list.map(({p,sc})=>pcardHTML(p,hasAns&&sc>=4)).join('') : '<div class="card" style="text-align:center;color:var(--sub)">이 분류에는 내용이 없어요.</div>';
+  // card padding for rate on right
+}
+function renderHomeProds(){
+  $('#homeProds').innerHTML=['irp-tax','irp-combo','irp-withdraw','irp-retire'].map(id=>pcardHTML(pById(id))).join('');
+}
+function openProduct(id){
+  const p=pById(id);
+  $('#sheet').innerHTML=`<div class="grab"></div>
+   <span class="tag" style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;background:#EEF1F7">${PCATS.find(c=>c[0]===p.cat)[1]}</span>
+   <h3 style="margin-top:6px">${p.name}</h3><div class="meta">${p.desc}</div>
+   <div class="big" style="color:${p.loan?'var(--up)':'var(--navy)'}">${p.rate}</div><div class="meta">${p.rateNote}${p.asof?' · '+p.asof:''}</div>
+   <div class="kimsay">${kimSVG(36)}<div><b>김차장 한마디</b><br>${p.kim}</div></div>
+   <table class="ptable"><tr><th>대상</th><td>${p.who}</td></tr><tr><th>기간</th><td>${p.period}</td></tr><tr><th>금액</th><td>${p.amount}</td></tr></table>
+   ${p.table?`<h5>한눈에 보기</h5><table class="ptable">${p.table.map(r=>`<tr><td>${r[0]}</td><td><b>${r[1]}</b></td></tr>`).join('')}</table>`:''}
+   <h5>알아둘 점</h5><ul class="pt">${p.perks.map(x=>`<li>${x}</li>`).join('')}</ul>
+   <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">
+     ${p.calc?`<button class="btn navy block" data-pcalc="${p.id}">🧮 내 숫자로 절세액 계산해 보기</button>`:''}
+     <button class="btn line block" data-ask="IRP ${p.name}">📰 관련 소식 찾아보기</button>
+     <a class="btn amber block" style="text-align:center;text-decoration:none" href="${JOIN_URL}" target="_blank" rel="noopener">상품 가입하기 (KB국민은행 공식 페이지) ›</a>
+   </div>
+   <div class="notice">출처: ${p.src.map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join(' · ')}<br>세법·한도는 해마다 바뀔 수 있고, 개인 상황에 따라 결과가 달라요. 가입한 금융회사, 국세청 홈택스, 금융감독원 통합연금포털에서 꼭 확인하세요. 투자 권유가 아닙니다.</div>`;
+  $('#dim').classList.add('on'); prepSheet();
+}
+function prodCalc(id){
+  const p=pById(id); if(!p||!p.calc) return; closeSheet('action');
+  calcPreset=p.calc; calcMode=p.calc.mode; go('calc'); renderCalc();
+  toast('예시 숫자를 넣었어요. 내 숫자로 바꿔 보세요');
+}
+/* ============ 8-2. 오프닝 ============ */
+function runSplash(){
+  const sp=$('#splash'); $('#splashKim').innerHTML=kimSVG(150,'#FFE3A8');
+  let done=false; const end=()=>{ if(done) return; done=true; sp.classList.add('hide'); setTimeout(()=>sp.remove(),600); };
+  $('#skipBtn').onclick=end; sp.addEventListener('click',e=>{ if(e.target.id!=='skipBtn') end(); });
+  setTimeout(end,3200);
+}
+
+
+/* ============ 8-3. 상품 가입하기 (KB국민은행 공식 페이지 연결) ============ */
+const JOIN_URL='https://ombr.kbstar.com/quics?page=ombr&pageCd=QT0102&Type=A&empid=1625766&fprcode=F02ZZZZZZZZZZZZ0&Dstic=AO3&n=&o=0';
+const JOIN_QR=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59 59" shape-rendering="crispEdges" role="img" aria-label="상품 가입 QR"><rect width="59" height="59" fill="#fff"/><path fill="#16233F" d="M3 3h7v1h-7zM11 3h2v1h-2zM22 3h2v1h-2zM26 3h1v1h-1zM28 3h2v1h-2zM33 3h5v1h-5zM40 3h2v1h-2zM44 3h2v1h-2zM49 3h7v1h-7zM3 4h1v1h-1zM9 4h1v1h-1zM13 4h3v1h-3zM17 4h1v1h-1zM20 4h10v1h-10zM31 4h6v1h-6zM40 4h2v1h-2zM43 4h1v1h-1zM45 4h2v1h-2zM49 4h1v1h-1zM55 4h1v1h-1zM3 5h1v1h-1zM5 5h3v1h-3zM9 5h1v1h-1zM11 5h2v1h-2zM15 5h3v1h-3zM19 5h5v1h-5zM26 5h3v1h-3zM31 5h1v1h-1zM34 5h1v1h-1zM38 5h2v1h-2zM41 5h2v1h-2zM44 5h1v1h-1zM46 5h1v1h-1zM49 5h1v1h-1zM51 5h3v1h-3zM55 5h1v1h-1zM3 6h1v1h-1zM5 6h3v1h-3zM9 6h1v1h-1zM11 6h2v1h-2zM14 6h2v1h-2zM17 6h3v1h-3zM23 6h3v1h-3zM27 6h3v1h-3zM31 6h3v1h-3zM36 6h2v1h-2zM45 6h1v1h-1zM47 6h1v1h-1zM49 6h1v1h-1zM51 6h3v1h-3zM55 6h1v1h-1zM3 7h1v1h-1zM5 7h3v1h-3zM9 7h1v1h-1zM12 7h1v1h-1zM14 7h1v1h-1zM16 7h1v1h-1zM19 7h1v1h-1zM21 7h1v1h-1zM24 7h9v1h-9zM34 7h1v1h-1zM36 7h1v1h-1zM38 7h2v1h-2zM41 7h5v1h-5zM49 7h1v1h-1zM51 7h3v1h-3zM55 7h1v1h-1zM3 8h1v1h-1zM9 8h1v1h-1zM11 8h1v1h-1zM15 8h1v1h-1zM17 8h3v1h-3zM22 8h1v1h-1zM24 8h4v1h-4zM31 8h1v1h-1zM34 8h1v1h-1zM38 8h2v1h-2zM43 8h1v1h-1zM45 8h1v1h-1zM49 8h1v1h-1zM55 8h1v1h-1zM3 9h7v1h-7zM11 9h1v1h-1zM13 9h1v1h-1zM15 9h1v1h-1zM17 9h1v1h-1zM19 9h1v1h-1zM21 9h1v1h-1zM23 9h1v1h-1zM25 9h1v1h-1zM27 9h1v1h-1zM29 9h1v1h-1zM31 9h1v1h-1zM33 9h1v1h-1zM35 9h1v1h-1zM37 9h1v1h-1zM39 9h1v1h-1zM41 9h1v1h-1zM43 9h1v1h-1zM45 9h1v1h-1zM47 9h1v1h-1zM49 9h7v1h-7zM11 10h1v1h-1zM13 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM21 10h1v1h-1zM24 10h4v1h-4zM31 10h2v1h-2zM35 10h6v1h-6zM42 10h1v1h-1zM45 10h1v1h-1zM4 11h1v1h-1zM6 11h1v1h-1zM8 11h4v1h-4zM16 11h2v1h-2zM25 11h1v1h-1zM27 11h5v1h-5zM34 11h1v1h-1zM36 11h1v1h-1zM39 11h5v1h-5zM45 11h6v1h-6zM52 11h2v1h-2zM55 11h1v1h-1zM6 12h2v1h-2zM11 12h1v1h-1zM15 12h4v1h-4zM20 12h3v1h-3zM26 12h2v1h-2zM29 12h1v1h-1zM34 12h3v1h-3zM39 12h2v1h-2zM43 12h1v1h-1zM46 12h1v1h-1zM50 12h3v1h-3zM54 12h2v1h-2zM3 13h1v1h-1zM5 13h3v1h-3zM9 13h2v1h-2zM12 13h4v1h-4zM17 13h3v1h-3zM23 13h2v1h-2zM26 13h3v1h-3zM34 13h2v1h-2zM37 13h3v1h-3zM42 13h2v1h-2zM50 13h2v1h-2zM53 13h2v1h-2zM3 14h1v1h-1zM6 14h3v1h-3zM10 14h2v1h-2zM16 14h1v1h-1zM18 14h2v1h-2zM22 14h1v1h-1zM24 14h2v1h-2zM28 14h2v1h-2zM31 14h1v1h-1zM33 14h2v1h-2zM36 14h1v1h-1zM39 14h2v1h-2zM46 14h2v1h-2zM49 14h1v1h-1zM53 14h1v1h-1zM3 15h4v1h-4zM9 15h4v1h-4zM14 15h1v1h-1zM18 15h1v1h-1zM21 15h2v1h-2zM24 15h1v1h-1zM28 15h2v1h-2zM31 15h1v1h-1zM34 15h6v1h-6zM43 15h1v1h-1zM47 15h1v1h-1zM50 15h4v1h-4zM55 15h1v1h-1zM4 16h1v1h-1zM11 16h3v1h-3zM16 16h4v1h-4zM21 16h5v1h-5zM28 16h3v1h-3zM34 16h1v1h-1zM36 16h2v1h-2zM40 16h1v1h-1zM43 16h2v1h-2zM46 16h2v1h-2zM8 17h4v1h-4zM14 17h2v1h-2zM18 17h3v1h-3zM22 17h1v1h-1zM24 17h1v1h-1zM26 17h1v1h-1zM28 17h2v1h-2zM31 17h1v1h-1zM33 17h2v1h-2zM36 17h3v1h-3zM40 17h1v1h-1zM43 17h2v1h-2zM47 17h1v1h-1zM49 17h1v1h-1zM54 17h2v1h-2zM3 18h1v1h-1zM6 18h1v1h-1zM11 18h2v1h-2zM15 18h1v1h-1zM18 18h2v1h-2zM22 18h3v1h-3zM27 18h1v1h-1zM30 18h2v1h-2zM35 18h2v1h-2zM39 18h1v1h-1zM41 18h1v1h-1zM43 18h1v1h-1zM47 18h1v1h-1zM51 18h1v1h-1zM55 18h1v1h-1zM6 19h1v1h-1zM8 19h4v1h-4zM13 19h3v1h-3zM18 19h3v1h-3zM22 19h1v1h-1zM25 19h1v1h-1zM29 19h1v1h-1zM31 19h1v1h-1zM34 19h2v1h-2zM37 19h3v1h-3zM41 19h1v1h-1zM51 19h2v1h-2zM3 20h1v1h-1zM8 20h1v1h-1zM10 20h6v1h-6zM17 20h2v1h-2zM21 20h7v1h-7zM30 20h1v1h-1zM32 20h1v1h-1zM34 20h3v1h-3zM39 20h1v1h-1zM41 20h1v1h-1zM43 20h1v1h-1zM47 20h1v1h-1zM53 20h3v1h-3zM3 21h1v1h-1zM5 21h1v1h-1zM9 21h1v1h-1zM11 21h1v1h-1zM14 21h1v1h-1zM20 21h1v1h-1zM26 21h4v1h-4zM31 21h1v1h-1zM34 21h2v1h-2zM39 21h1v1h-1zM41 21h1v1h-1zM43 21h2v1h-2zM46 21h1v1h-1zM48 21h1v1h-1zM50 21h2v1h-2zM53 21h3v1h-3zM4 22h1v1h-1zM6 22h2v1h-2zM11 22h2v1h-2zM14 22h2v1h-2zM18 22h1v1h-1zM22 22h1v1h-1zM24 22h1v1h-1zM26 22h3v1h-3zM30 22h3v1h-3zM34 22h5v1h-5zM40 22h2v1h-2zM43 22h2v1h-2zM48 22h2v1h-2zM51 22h2v1h-2zM54 22h2v1h-2zM4 23h1v1h-1zM6 23h1v1h-1zM9 23h3v1h-3zM13 23h1v1h-1zM16 23h2v1h-2zM19 23h1v1h-1zM21 23h1v1h-1zM23 23h1v1h-1zM25 23h2v1h-2zM28 23h1v1h-1zM30 23h1v1h-1zM33 23h2v1h-2zM36 23h1v1h-1zM41 23h4v1h-4zM46 23h2v1h-2zM50 23h2v1h-2zM53 23h3v1h-3zM3 24h4v1h-4zM8 24h1v1h-1zM10 24h1v1h-1zM12 24h1v1h-1zM15 24h1v1h-1zM18 24h5v1h-5zM25 24h4v1h-4zM31 24h2v1h-2zM35 24h1v1h-1zM38 24h2v1h-2zM41 24h3v1h-3zM46 24h1v1h-1zM48 24h1v1h-1zM50 24h1v1h-1zM52 24h2v1h-2zM55 24h1v1h-1zM3 25h1v1h-1zM5 25h2v1h-2zM9 25h1v1h-1zM12 25h1v1h-1zM15 25h2v1h-2zM18 25h2v1h-2zM21 25h1v1h-1zM24 25h4v1h-4zM29 25h1v1h-1zM32 25h2v1h-2zM36 25h3v1h-3zM40 25h2v1h-2zM43 25h5v1h-5zM49 25h1v1h-1zM51 25h2v1h-2zM4 26h2v1h-2zM8 26h1v1h-1zM10 26h1v1h-1zM14 26h1v1h-1zM16 26h1v1h-1zM19 26h1v1h-1zM24 26h1v1h-1zM29 26h2v1h-2zM32 26h3v1h-3zM38 26h2v1h-2zM43 26h2v1h-2zM46 26h2v1h-2zM49 26h5v1h-5zM55 26h1v1h-1zM4 27h1v1h-1zM6 27h6v1h-6zM13 27h6v1h-6zM20 27h2v1h-2zM24 27h1v1h-1zM26 27h7v1h-7zM34 27h4v1h-4zM39 27h2v1h-2zM43 27h1v1h-1zM45 27h8v1h-8zM54 27h1v1h-1zM4 28h1v1h-1zM7 28h1v1h-1zM11 28h1v1h-1zM14 28h1v1h-1zM16 28h1v1h-1zM18 28h3v1h-3zM22 28h6v1h-6zM31 28h1v1h-1zM34 28h2v1h-2zM37 28h1v1h-1zM39 28h2v1h-2zM43 28h1v1h-1zM46 28h2v1h-2zM51 28h3v1h-3zM55 28h1v1h-1zM4 29h1v1h-1zM7 29h1v1h-1zM9 29h1v1h-1zM11 29h1v1h-1zM17 29h2v1h-2zM20 29h1v1h-1zM22 29h1v1h-1zM25 29h1v1h-1zM27 29h1v1h-1zM29 29h1v1h-1zM31 29h3v1h-3zM35 29h1v1h-1zM37 29h1v1h-1zM41 29h4v1h-4zM47 29h1v1h-1zM49 29h1v1h-1zM51 29h2v1h-2zM54 29h2v1h-2zM4 30h4v1h-4zM11 30h1v1h-1zM13 30h4v1h-4zM18 30h2v1h-2zM22 30h2v1h-2zM25 30h3v1h-3zM31 30h2v1h-2zM36 30h1v1h-1zM40 30h1v1h-1zM43 30h2v1h-2zM46 30h2v1h-2zM51 30h2v1h-2zM54 30h2v1h-2zM6 31h8v1h-8zM16 31h1v1h-1zM19 31h6v1h-6zM27 31h10v1h-10zM38 31h2v1h-2zM41 31h2v1h-2zM44 31h2v1h-2zM47 31h5v1h-5zM55 31h1v1h-1zM3 32h1v1h-1zM5 32h1v1h-1zM10 32h2v1h-2zM14 32h1v1h-1zM16 32h2v1h-2zM19 32h1v1h-1zM22 32h2v1h-2zM27 32h3v1h-3zM33 32h1v1h-1zM35 32h2v1h-2zM39 32h1v1h-1zM41 32h2v1h-2zM46 32h2v1h-2zM52 32h1v1h-1zM54 32h2v1h-2zM7 33h4v1h-4zM13 33h1v1h-1zM18 33h3v1h-3zM22 33h2v1h-2zM25 33h2v1h-2zM29 33h1v1h-1zM31 33h1v1h-1zM33 33h1v1h-1zM35 33h1v1h-1zM40 33h1v1h-1zM42 33h4v1h-4zM48 33h4v1h-4zM53 33h3v1h-3zM3 34h1v1h-1zM5 34h1v1h-1zM8 34h1v1h-1zM10 34h2v1h-2zM14 34h3v1h-3zM19 34h2v1h-2zM23 34h1v1h-1zM25 34h3v1h-3zM29 34h7v1h-7zM37 34h3v1h-3zM42 34h1v1h-1zM44 34h3v1h-3zM48 34h1v1h-1zM52 34h1v1h-1zM4 35h1v1h-1zM7 35h1v1h-1zM9 35h3v1h-3zM14 35h1v1h-1zM16 35h1v1h-1zM19 35h1v1h-1zM21 35h3v1h-3zM26 35h5v1h-5zM38 35h2v1h-2zM43 35h2v1h-2zM49 35h1v1h-1zM52 35h3v1h-3zM3 36h1v1h-1zM5 36h1v1h-1zM8 36h1v1h-1zM10 36h3v1h-3zM14 36h1v1h-1zM17 36h1v1h-1zM19 36h2v1h-2zM22 36h3v1h-3zM26 36h2v1h-2zM31 36h1v1h-1zM33 36h3v1h-3zM38 36h2v1h-2zM42 36h3v1h-3zM46 36h1v1h-1zM55 36h1v1h-1zM5 37h1v1h-1zM7 37h3v1h-3zM12 37h3v1h-3zM17 37h3v1h-3zM21 37h1v1h-1zM23 37h2v1h-2zM26 37h3v1h-3zM31 37h1v1h-1zM33 37h1v1h-1zM36 37h5v1h-5zM46 37h2v1h-2zM50 37h5v1h-5zM5 38h1v1h-1zM7 38h2v1h-2zM10 38h1v1h-1zM14 38h2v1h-2zM19 38h2v1h-2zM24 38h1v1h-1zM30 38h1v1h-1zM35 38h11v1h-11zM49 38h1v1h-1zM53 38h1v1h-1zM5 39h2v1h-2zM9 39h1v1h-1zM14 39h4v1h-4zM19 39h2v1h-2zM22 39h3v1h-3zM27 39h1v1h-1zM30 39h1v1h-1zM33 39h3v1h-3zM39 39h1v1h-1zM41 39h1v1h-1zM43 39h2v1h-2zM48 39h1v1h-1zM50 39h1v1h-1zM54 39h1v1h-1zM4 40h1v1h-1zM8 40h1v1h-1zM10 40h1v1h-1zM13 40h1v1h-1zM15 40h2v1h-2zM18 40h1v1h-1zM21 40h1v1h-1zM24 40h1v1h-1zM27 40h2v1h-2zM32 40h1v1h-1zM35 40h1v1h-1zM37 40h1v1h-1zM40 40h1v1h-1zM43 40h1v1h-1zM46 40h2v1h-2zM49 40h1v1h-1zM52 40h1v1h-1zM55 40h1v1h-1zM5 41h3v1h-3zM9 41h1v1h-1zM11 41h1v1h-1zM15 41h1v1h-1zM17 41h1v1h-1zM19 41h1v1h-1zM21 41h1v1h-1zM24 41h1v1h-1zM28 41h3v1h-3zM32 41h2v1h-2zM35 41h3v1h-3zM39 41h1v1h-1zM41 41h2v1h-2zM44 41h1v1h-1zM46 41h1v1h-1zM49 41h7v1h-7zM3 42h1v1h-1zM5 42h3v1h-3zM10 42h3v1h-3zM15 42h2v1h-2zM23 42h1v1h-1zM26 42h6v1h-6zM33 42h1v1h-1zM35 42h1v1h-1zM38 42h2v1h-2zM42 42h3v1h-3zM47 42h1v1h-1zM49 42h1v1h-1zM3 43h3v1h-3zM7 43h1v1h-1zM9 43h1v1h-1zM11 43h1v1h-1zM13 43h2v1h-2zM18 43h4v1h-4zM26 43h2v1h-2zM30 43h2v1h-2zM33 43h1v1h-1zM35 43h1v1h-1zM37 43h4v1h-4zM46 43h3v1h-3zM51 43h2v1h-2zM54 43h2v1h-2zM3 44h2v1h-2zM7 44h2v1h-2zM10 44h1v1h-1zM14 44h2v1h-2zM20 44h1v1h-1zM22 44h1v1h-1zM24 44h2v1h-2zM27 44h4v1h-4zM33 44h3v1h-3zM38 44h1v1h-1zM40 44h2v1h-2zM43 44h2v1h-2zM48 44h2v1h-2zM53 44h3v1h-3zM3 45h2v1h-2zM6 45h4v1h-4zM12 45h1v1h-1zM14 45h1v1h-1zM18 45h2v1h-2zM22 45h3v1h-3zM26 45h2v1h-2zM29 45h2v1h-2zM32 45h1v1h-1zM35 45h1v1h-1zM39 45h2v1h-2zM42 45h1v1h-1zM44 45h1v1h-1zM46 45h1v1h-1zM49 45h1v1h-1zM51 45h1v1h-1zM53 45h3v1h-3zM4 46h2v1h-2zM13 46h1v1h-1zM16 46h4v1h-4zM22 46h2v1h-2zM26 46h1v1h-1zM28 46h1v1h-1zM31 46h2v1h-2zM35 46h1v1h-1zM38 46h2v1h-2zM41 46h3v1h-3zM46 46h2v1h-2zM50 46h1v1h-1zM54 46h2v1h-2zM6 47h1v1h-1zM9 47h1v1h-1zM13 47h2v1h-2zM18 47h2v1h-2zM21 47h2v1h-2zM25 47h7v1h-7zM33 47h2v1h-2zM39 47h1v1h-1zM41 47h2v1h-2zM44 47h1v1h-1zM47 47h7v1h-7zM55 47h1v1h-1zM11 48h1v1h-1zM15 48h4v1h-4zM22 48h1v1h-1zM24 48h1v1h-1zM27 48h1v1h-1zM31 48h2v1h-2zM34 48h2v1h-2zM37 48h1v1h-1zM42 48h2v1h-2zM46 48h2v1h-2zM51 48h3v1h-3zM55 48h1v1h-1zM3 49h7v1h-7zM11 49h1v1h-1zM17 49h3v1h-3zM22 49h1v1h-1zM24 49h4v1h-4zM29 49h1v1h-1zM31 49h3v1h-3zM35 49h1v1h-1zM38 49h2v1h-2zM41 49h7v1h-7zM49 49h1v1h-1zM51 49h1v1h-1zM53 49h2v1h-2zM3 50h1v1h-1zM9 50h1v1h-1zM11 50h2v1h-2zM14 50h1v1h-1zM16 50h4v1h-4zM21 50h1v1h-1zM23 50h1v1h-1zM25 50h3v1h-3zM31 50h4v1h-4zM37 50h1v1h-1zM39 50h5v1h-5zM46 50h2v1h-2zM51 50h1v1h-1zM53 50h3v1h-3zM3 51h1v1h-1zM5 51h3v1h-3zM9 51h1v1h-1zM12 51h5v1h-5zM18 51h1v1h-1zM22 51h1v1h-1zM24 51h1v1h-1zM26 51h7v1h-7zM34 51h2v1h-2zM38 51h6v1h-6zM47 51h5v1h-5zM55 51h1v1h-1zM3 52h1v1h-1zM5 52h3v1h-3zM9 52h1v1h-1zM11 52h6v1h-6zM18 52h2v1h-2zM23 52h1v1h-1zM25 52h2v1h-2zM28 52h3v1h-3zM33 52h3v1h-3zM37 52h1v1h-1zM40 52h1v1h-1zM43 52h2v1h-2zM46 52h1v1h-1zM49 52h4v1h-4zM3 53h1v1h-1zM5 53h3v1h-3zM9 53h1v1h-1zM12 53h1v1h-1zM14 53h1v1h-1zM16 53h4v1h-4zM21 53h2v1h-2zM24 53h3v1h-3zM28 53h2v1h-2zM32 53h1v1h-1zM49 53h4v1h-4zM54 53h2v1h-2zM3 54h1v1h-1zM9 54h1v1h-1zM11 54h2v1h-2zM14 54h1v1h-1zM17 54h5v1h-5zM23 54h1v1h-1zM29 54h4v1h-4zM35 54h2v1h-2zM40 54h1v1h-1zM44 54h2v1h-2zM50 54h1v1h-1zM52 54h1v1h-1zM54 54h1v1h-1zM3 55h7v1h-7zM15 55h2v1h-2zM18 55h1v1h-1zM20 55h1v1h-1zM24 55h3v1h-3zM29 55h1v1h-1zM34 55h4v1h-4zM39 55h1v1h-1zM41 55h2v1h-2zM46 55h4v1h-4zM51 55h1v1h-1zM54 55h1v1h-1z"/></svg>`;
+function joinBoxHTML(){
+  return `<div class="join"><div class="hd">상품 가입하기 <span>KB국민은행 공식 페이지</span></div>
+   <div class="bd"><div class="qr">${JOIN_QR}</div><div><p>휴대폰이라면 아래 <b>가입 페이지 열기</b>를 누르고, PC·태블릿에서 보고 있다면 휴대폰 카메라로 QR을 비춰 주세요.</p></div></div>
+   <a class="go" href="${JOIN_URL}" target="_blank" rel="noopener">가입 페이지 열기 ›</a>
+   <div class="fine">가입·상담은 KB국민은행 공식 사이트(kbstar.com)에서 진행돼요. 이 앱의 안내는 이해를 돕기 위한 교육용 정보이며, 가입 전 상품설명서와 약관을 꼭 확인하세요.</div></div>`;
+}
+
+/* ============ 9. 김차장 (웹검색 정리 방식 · AI 직접 연결 없음) ============ */
+/* ★ 데이터 서버 주소 ★ Google Apps Script 웹 앱 URL(…/exec)을 아래 따옴표 안에 붙여넣으세요.
+   그러면 모든 사용자가 설정 없이 실시간 시세와 뉴스 검색을 쓸 수 있어요. */
+const DEFAULT_SEARCH_SERVER = 'https://script.google.com/macros/s/AKfycbychAEhHEgV9bN4UKIxTYa5Hdb71Z65fFrvfNgwtWxotFezmRcoh2DTozhd8omjCnQs/exec';
+let searchServer = store.get('server', '') || DEFAULT_SEARCH_SERVER;
+let busy=false, netBlockedShown=false;
+
+const STOP = new Set(['뭐','뭐야','뭔가요','뭐예요','무엇','무엇인가요','왜','어떻게','알려줘','알려주세요','설명해줘','설명','얼마','얼마나','얼마야','지금','오늘','요즘','좀','나','나한테','내','저','제','뭐가','좋아','돼','해줘','쉽게','줘','있어','거야','뭘까','되나요','하나요','인가요','이유가','뜻','의미','관련','대해','대해서','그리고','그럼','어때','어때요','될까','할까','해','하는','건가요','것','거','수','더','다들','봐','뭐길래','길래']);
+const JOSA = ['에서는','으로는','이라는','라는','에서','으로','이랑','하고','하면','이면','이야','에게','한테','까지','부터','처럼','보다','은','는','이','가','을','를','의','에','로','와','과','도','만','면','야','랑'];
+function keywords(q){
+  const toks=q.replace(/[?!.,~"'()\[\]…·]/g,' ').split(/\s+/).filter(Boolean);
+  const out=[];
+  for(let t of toks){
+    if(STOP.has(t)) continue;
+    for(const j of JOSA){ if(t.length>j.length+1 && t.endsWith(j)){ t=t.slice(0,-j.length); break; } }
+    if(t.length<2 && !/^[A-Za-z0-9%]+$/.test(t)) continue;
+    if(STOP.has(t)) continue;
+    if(!out.includes(t)) out.push(t);
+  }
+  return out.slice(0,5);
+}
+const ITEM_KEYS=[['달러','usd'],['환율','usd'],['엔화','jpy'],['엔','jpy'],['유로','eur'],['위안','cny'],['코스피','kospi'],['코스닥','kosdaq'],['나스닥','ndx'],['S&P','spx'],['다우','dji'],['금값','golddon'],['금 시세','golddon'],['금시세','golddon'],['한 돈','golddon'],['한돈','golddon'],['돌반지','golddon'],['유가','wti'],['기름','wti'],['비트코인','btc'],['코인 시세','btc'],['코인값','btc'],['이더','eth'],['기준금리','bok'],['금통위','bok'],['연준','fed'],['FOMC','fed'],['코픽스','cofix'],['대출','cofix']];
+const PROD_KEYS=[['세액공제','irp-tax'],['연말정산','irp-tax'],['환급','irp-tax'],['돌려받','irp-tax'],['연금저축','irp-combo'],['ISA','irp-isa'],['70%','irp-invest'],['위험자산','irp-invest'],['ETF','irp-invest'],['디폴트','irp-default'],['사전지정','irp-default'],['수수료','irp-fee'],['계좌 이전','irp-move'],['실물이전','irp-move'],['갈아타','irp-move'],['중도인출','irp-withdraw'],['해지','irp-withdraw'],['인출','irp-withdraw'],['퇴직금','irp-retire'],['퇴직소득세','irp-retire'],['연금소득세','irp-pension'],['연금 수령','irp-pension'],['연금수령','irp-pension'],['IRP','irp-what'],['퇴직연금','irp-what']];
+function localProduct(q){const m=PROD_KEYS.find(x=>q.includes(x[0])); return m?pById(m[1]):null}
+function localItem(q){const m=ITEM_KEYS.find(x=>q.includes(x[0])); return m?byId(m[1]):null}
+function localTerm(q){return TERMS.find(t=>t[0].split(/\s*\/\s*/).some(n=>q.includes(n)))}
+function calcIntent(q){
+  if(/적금|예금|만기|이자 ?받/.test(q)) return 'save';
+  if(/대출|상환|주담대|이자 ?늘|이자 ?얼마/.test(q)) return 'loan';
+  if(/환전|달러 ?사|엔 ?사|바꾸면/.test(q)) return 'fx';
+  return null;
+}
+async function getJSONt(url,ms=7000){
+  const c=new AbortController(); const t=setTimeout(()=>c.abort(),ms);
+  try{const r=await fetch(url,{signal:c.signal}); if(!r.ok) throw new Error('http '+r.status); return await r.json();}
+  finally{clearTimeout(t)}
+}
+async function searchWiki(kw){
+  if(!kw.length) return null;
+  const q=encodeURIComponent(kw.slice(0,3).join(' '));
+  const s=await getJSONt(`https://ko.wikipedia.org/w/api.php?action=query&list=search&srsearch=${q}&srlimit=1&format=json&origin=*`);
+  const hit=s?.query?.search?.[0]; if(!hit) return null;
+  const sum=await getJSONt(`https://ko.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(hit.title)}`);
+  if(!sum?.extract) return null;
+  return {title:sum.title, text:firstSentences(sum.extract,2), url:sum.content_urls?.mobile?.page||`https://ko.wikipedia.org/wiki/${encodeURIComponent(hit.title)}`};
+}
+async function searchNews(kw){
+  if(!searchServer || !kw.length) return null;
+  const sep=searchServer.includes('?')?'&':'?';
+  const r=await getJSONt(`${searchServer}${sep}q=${encodeURIComponent(kw.join(' '))}`,12000);
+  return Array.isArray(r?.items)? r : null;
+}
+function splitSent(t){ return (String(t).match(/[^.!?。]+(?:[.!?。]+|$)/g)||[]).map(x=>x.trim()).filter(Boolean); }
+function firstSentences(t,n){
+  const parts=splitSent(t.replace(/\s+/g,' '));
+  return parts.slice(0,n).join(' ');
+}
+function stripTags(h){const d=document.createElement('div');d.innerHTML=h||'';return (d.textContent||'').replace(/\s+/g,' ').trim()}
+function esc(t){return String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function ago(d){const t=new Date(d); if(isNaN(t)) return ''; const m=(Date.now()-t)/60000;
+  if(m<60) return Math.max(1,Math.round(m))+'분 전'; if(m<1440) return Math.round(m/60)+'시간 전'; if(m<1440*7) return Math.round(m/1440)+'일 전';
+  return `${t.getMonth()+1}/${t.getDate()}`}
+/* 뉴스 정리: 제목·요약에서 자주 나오는 단어를 뽑고, 질문 단어가 많이 든 문장을 골라 보여줌 (추출 요약, AI 없음) */
+function summarizeNews(items,kw){
+  const freq={};
+  const kwSet=new Set(kw);
+  items.forEach(it=>{
+    keywords(it.title.replace(/\s-\s[^-]+$/,'')).forEach(w=>{ if(!kwSet.has(w) && !/^\d+$/.test(w)) freq[w]=(freq[w]||0)+1; });
+  });
+  const hot=Object.entries(freq).filter(([,c])=>c>=2).sort((a,b)=>b[1]-a[1]).slice(0,4).map(([w])=>w);
+  const sents=[];
+  items.forEach(it=>{ const d=stripTags(it.description); if(!d) return;
+    splitSent(d).forEach(sn=>{ if(sn.length<15||sn.length>160) return;
+      const score=kw.reduce((a,w)=>a+(sn.includes(w)?2:0),0)+hot.reduce((a,w)=>a+(sn.includes(w)?1:0),0);
+      if(score>0) sents.push({sn,score,src:it.source}); }); });
+  sents.sort((a,b)=>b.score-a.score);
+  const picked=[]; for(const x of sents){ if(picked.length>=3) break; if(!picked.some(p=>p.sn.slice(0,20)===x.sn.slice(0,20))) picked.push(x); }
+  return {hot,picked};
+}
+function md(t){ return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function addMsg(who,html){
+  const d=document.createElement('div'); d.className='msg '+(who==='me'?'me':'kim');
+  d.innerHTML=(who==='me'?'':kimSVG(36))+`<div class="b">${html}</div>`;
+  $('#chatLog').appendChild(d); if($('#v-chat').classList.contains('on')) requestAnimationFrame(()=>window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}));
+  return d.querySelector('.b');
+}
+async function ask(q){
+  if(busy||!q.trim()) return; busy=true; go('chat');
+  addMsg('me',md(q));
+  const b=addMsg('kim','<span class="typing">🔎 김차장이 찾아보는 중이에요…</span>');
+  const pr=localProduct(q); const kw0=keywords(q); const kw=pr? ['IRP',...kw0.filter(w=>w.toUpperCase()!=='IRP')].slice(0,5) : kw0; const it=pr?null:localItem(q), term=localTerm(q), ci=pr?null:calcIntent(q);
+  const [wikiR,newsR]=await Promise.allSettled([ term? Promise.resolve(null) : searchWiki(kw), searchNews(kw) ]);
+  const wiki=wikiR.status==='fulfilled'?wikiR.value:null, news=newsR.status==='fulfilled'?newsR.value:null;
+  const blocked = wikiR.status==='rejected' && (!searchServer || newsR.status==='rejected');
+  let h='';
+  if(pr){ h+=`<div class="sec">📘 <b>IRP 가이드: ${pr.name}</b></div><strong>${pr.rate}</strong> <span class="tools">${pr.rateNote}${pr.asof?' · '+pr.asof:''}</span><br>${pr.kim}<br><button class="btn line" style="margin-top:8px;padding:7px 12px;font-size:12.5px" data-prod="${pr.id}">자세히 보기</button>${pr.calc?` <button class="btn navy" style="margin-top:8px;padding:7px 12px;font-size:12.5px" data-pcalc="${pr.id}">계산해 보기</button>`:''}`; }
+  if(it){ h+=`<div class="sec">📌 <b>지금 시세</b></div><strong>${it.name}</strong> ${plainVal(it)} (${chgText(it)})<br>${it.kim}<div class="tools">${it.live?'실시간':SNAP_TIME} · ${it.src}</div>`; }
+  if(term){ h+=`<div class="sec">📖 <b>뜻풀이: ${term[0]}</b></div>${term[2]}${term[3]?'<br>예) '+term[3]:''}`; }
+  else if(wiki){ h+=`<div class="sec">📖 <b>뜻풀이: ${esc(wiki.title)}</b></div>${esc(wiki.text)} <a href="${esc(wiki.url)}" target="_blank" rel="noopener">위키백과 ↗</a>`; }
+  if(news && news.items.length){
+    const items=news.items.slice(0,8); const {hot,picked}=summarizeNews(items,kw);
+    h+=`<div class="sec">📰 <b>최근 뉴스 정리</b> <span class="tools">(${items.length}건 검색)</span></div>`;
+    if(hot.length) h+=`요즘 기사에서는 <strong>${hot.map(esc).join(', ')}</strong> 이야기가 많이 나와요.<br>`;
+    if(picked.length) h+='<ul>'+picked.map(p=>`<li>${esc(p.sn)} <span class="tools">— ${esc(p.src||'')}</span></li>`).join('')+'</ul>';
+    h+='<div class="news">'+items.slice(0,5).map(n=>`<a href="${esc(n.link)}" target="_blank" rel="noopener"><b>${esc(n.title.replace(/\s-\s[^-]+$/,''))}</b><span>${esc(n.source||'')} · ${ago(n.date)}</span></a>`).join('')+'</div>';
+  }
+  if(ci){ const lab={save:'예·적금',loan:'대출이자',fx:'환전'}[ci]; h+=`<div class="sec">🧮 <b>직접 계산해 보기</b></div><button class="btn navy" data-calc="${ci}">${lab} 계산기 열기</button>`; }
+  if(!h){
+    h = blocked
+      ? `지금 이 화면에서는 인터넷 검색이 막혀 있어서 찾아볼 수가 없어요. 😅<br>앱을 웹에 올린 뒤 쓰시면 위키백과와 뉴스를 찾아 정리해 드려요. 그동안은 <b>시세</b>·<b>계산기</b>·<b>용어</b> 탭을 이용해 주세요!`
+      : `'${esc(kw.join(' '))}'(으)로 찾은 내용이 없어요. 환율·코스피·금값·비트코인·금리처럼 핵심 단어를 넣어 다시 물어봐 주세요.`;
+  } else {
+    if(blocked && !netBlockedShown){ h+=`<div class="tools">※ 이 화면에서는 인터넷 검색이 막혀 앱 데이터로만 답했어요.</div>`; netBlockedShown=true; }
+    else if(searchServer && newsR.status==='rejected'){ h+=`<div class="tools">※ 뉴스 검색 서버에 연결하지 못했어요. ⚙ 설정에서 주소를 확인해 주세요.</div>`; }
+    else if(!searchServer && !blocked){ h+=`<div class="tools">※ 뉴스 검색은 데이터 서버를 연결하면 켜져요.</div>`; }
+    h+=`<div class="tools">검색 결과를 김차장이 자동으로 골라 정리한 내용이에요. 중요한 결정 전엔 원문을 꼭 확인하세요.</div>`;
+  }
+  b.innerHTML=h; busy=false;
+  requestAnimationFrame(()=>window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}));
+}
+function setMode(){
+  $('#modeBar').innerHTML = `<span style="flex:1">🔎 <b>웹검색 정리 모드</b> · 위키백과${searchServer?' + 뉴스':''}에서 찾아 정리해요${searchServer?'':' (뉴스: 미연결)'}</span><button class="btn line" style="padding:5px 10px;font-size:12px" data-settings="1">⚙ 설정</button>`;
+}
+function openSettings(){
+  $('#sheet').innerHTML=`<div class="grab"></div><h3>⚙ 데이터 서버 설정</h3>
+   <p class="meta" style="margin:6px 0 14px">실시간 시세(코스피·미국 지수·금·유가 등)와 뉴스 검색은 무료 '데이터 서버'(Google Apps Script)를 통해 받아와요. 배포 후 받은 웹 앱 URL을 붙여넣으세요.</p>
+   <div class="fld"><label>데이터 서버 URL</label><div class="in"><input id="srvIn" placeholder="https://script.google.com/macros/s/.../exec" value="${esc(searchServer)}"></div></div>
+   <div style="display:flex;gap:8px"><button class="btn navy" style="flex:1" id="srvSave">저장</button><button class="btn line" id="srvTest">연결 테스트</button></div>
+   <p class="meta" id="srvMsg" style="margin-top:10px"></p>`;
+  $('#dim').classList.add('on'); prepSheet();
+  $('#srvSave').onclick=()=>{searchServer=$('#srvIn').value.trim(); store.set('server',searchServer); setMode(); closeSheet(); toast(searchServer?'데이터 서버를 연결했어요':'데이터 서버 연결을 해제했어요'); refreshLive(false);};
+  $('#srvTest').onclick=async()=>{const u=$('#srvIn').value.trim(); const m=$('#srvMsg'); m.textContent='테스트 중…';
+    try{const old=searchServer; searchServer=u; const r=await getJSON(serverUrl('type=market'),15000); searchServer=old;
+      m.textContent= (r&&r.items)? `✅ 연결 성공! 시세 ${Object.keys(r.items).length}개를 받았어요.` : '⚠️ 응답은 왔지만 형식이 달라요. URL을 확인해 주세요.';}
+    catch(e){m.textContent='❌ 연결 실패. URL이 맞는지, 이 화면이 인터넷 검색을 막는 미리보기는 아닌지 확인해 주세요.'}};
+}
+function initChat(){
+  addMsg('kim',`안녕하세요, <strong>금융친구 김차장</strong>이에요! 😊<br><b>개인형 IRP·연금 정보</b>와 <b>시세·위키백과·최근 뉴스</b>를 찾아서 한눈에 정리해 드릴게요.`);
+  const qs=['IRP 세액공제','연금저축 IRP 차이','IRP 중도인출','퇴직금 IRP','연금소득세','디폴트옵션'];
+  $('#quickQs').innerHTML=qs.map(q=>`<button data-ask="${q}">${q}</button>`).join('');
+}
+
+/* ============ 10. 라우팅 & 이벤트 ============ */
+const VIEWS=['home','prod','market','calc','chat','dict'];
+function go(v){
+  if(!VIEWS.includes(v)) v='home';
+  $$('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+  $$('nav.tab button').forEach(b=>b.classList.toggle('on',b.dataset.go===v));
+  $('#composer').classList.toggle('on',v==='chat');
+  if(location.hash!=='#'+v){ try{ window.history.replaceState(null,'','#'+v) }catch(e){} }
+  if(v!=='chat') window.scrollTo(0,0);
+}
+function renderAll(){ renderHome(); renderHomeProds(); renderMarket(); if($('#calcBox').children.length) calc(); }
+
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-star],[data-go],[data-item],[data-cat],[data-ask],[data-c],[data-s],[data-togfav],[data-calc],[data-settings],[data-retry],[data-prod],[data-pcat],[data-fk],[data-freset],[data-pcalc]');
+  if(e.target===$('#dim')){closeSheet();return}
+  if(!t) return;
+  if(t.dataset.star){e.stopPropagation(); favs=favs.filter(x=>x!==t.dataset.star); store.set('favs',favs); renderHome(); toast('관심 지표에서 뺐어요'); return}
+  if(t.dataset.togfav){const id=t.dataset.togfav; favs=favs.includes(id)?favs.filter(x=>x!==id):[...favs,id]; store.set('favs',favs); renderHome(); openItem(id); toast(favs.includes(id)?'홈에 추가했어요':'관심 해제했어요'); return}
+  if(t.dataset.retry){refreshLive(true); return}
+  if(t.dataset.settings){openSettings(); return}
+  if(t.dataset.prod){openProduct(t.dataset.prod); return}
+  if(t.dataset.pcalc){prodCalc(t.dataset.pcalc); return}
+  if(t.dataset.pcat){prodCat=t.dataset.pcat; renderProducts(); return}
+  if(t.dataset.fk){finderAns[t.dataset.fk]=finderAns[t.dataset.fk]===t.dataset.fv?undefined:t.dataset.fv; Object.keys(finderAns).forEach(k=>finderAns[k]===undefined&&delete finderAns[k]); store.set('irpFinder',finderAns); prodCat='all'; renderProducts(); return}
+  if(t.dataset.freset){finderAns={}; store.set('irpFinder',finderAns); renderProducts(); return}
+  if(t.dataset.calc){calcMode=t.dataset.calc; go('calc'); renderCalc(); return}
+  if(t.dataset.ask){closeSheet('action'); ask(t.dataset.ask); return}
+  if(t.dataset.item){openItem(t.dataset.item); return}
+  if(t.dataset.go){go(t.dataset.go); return}
+  if(t.dataset.cat){curCat=t.dataset.cat; renderMarket(); return}
+  if(t.dataset.c){calcMode=t.dataset.c; renderCalc(); return}
+  if(t.dataset.s){$('#calcBox').dataset.s=t.dataset.s; calc(); return}
+});
+document.addEventListener('input',e=>{ if(e.target.closest('#calcBox')) calc(); if(e.target.id==='dictQ') renderDict(e.target.value); });
+document.addEventListener('change',e=>{ if(e.target.closest('#calcBox')) calc(); });
+$('#chatForm').addEventListener('submit',e=>{e.preventDefault(); const v=$('#chatIn').value; $('#chatIn').value=''; ask(v)});
+$('#refreshBtn').addEventListener('click',()=>{ checkVersion(); refreshLive(true); });
+window.addEventListener('hashchange',()=>go(location.hash.slice(1)));
+
+/* init */
+runSplash(); $('#joinHome').innerHTML=joinBoxHTML(); $('#joinProd').innerHTML=joinBoxHTML(); paintAvatars(); renderAll(); renderProducts(); renderCalc(); renderDict(); initChat();
+go(location.hash.slice(1)||'home');
+checkVersion();
+refreshLive(false);
+setMode();
+</script>
+</body>
+</html>
